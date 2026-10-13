@@ -1,4 +1,4 @@
-# Clarify evidence strength: Resq Monitor
+# Clarify evidence strength: Result Quality Monitor
 
 **Decision to illustrate:** whether supplied categorical outputs meet declared accuracy and operating-cost expectations against supplied reference labels. The reference label is evidence from the caller, not automatically ground truth.
 

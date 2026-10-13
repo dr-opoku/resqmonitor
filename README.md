@@ -6,7 +6,7 @@ A small, local monitor for categorical predictions and supplied outcome labels. 
 
 ### Related example
 
-[`dataqmonitor`](https://github.com/dr-opoku/dataqmonitor) shows a complementary decision: whether incoming data meets declared completeness, freshness and consistency expectations. **Dataq examines inputs; Resq examines results.** Both keep observed values separate from adequately supported verdicts. They are independent examples; no software integration is required.
+[`dataqmonitor`](https://github.com/dr-opoku/dataqmonitor) shows a complementary decision: whether incoming data meets declared completeness, freshness and consistency expectations. **Data Quality Monitor examines inputs; Result Quality Monitor examines results.** Both keep observed values separate from adequately supported verdicts. They are independent examples; no software integration is required.
 
 ## What does the evidence support?
 
