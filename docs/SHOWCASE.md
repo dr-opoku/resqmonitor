@@ -10,7 +10,7 @@ This example uses synthetic ticket classification. The degraded scenario preserv
 
 - Define observable acceptance criteria for an automated business workflow.
 - Distinguish output confidence from measured correctness.
-- Include unsuccessful outcomes in the economics of correct results.
+- Include incorrect labelled outcomes in the economics of correct results.
 - Keep denominators, incomplete outcomes, and baseline limitations explicit.
 - Offer a compact implementation usable by people, scripts, and agents.
 
@@ -23,3 +23,7 @@ An organization could map its own classification labels, feed human-reviewed out
 ## Scope discipline
 
 Only code written for this demonstration and synthetic fixtures belong here. Private platform implementations, internal prompts, infrastructure details, and customer records are outside the showcase.
+
+## Evidence strength as a transferable skill
+
+The `small_sample` fixture deliberately shows 100% observed success with an unknown verdict. The capability being demonstrated is formulating a bounded decision, declaring the reference and denominator, and making insufficient evidence visible to humans and agents. See [evidence policy and domain examples](EVIDENCE_POLICY.md). Neither a sample count nor a green report independently validates a business deployment.

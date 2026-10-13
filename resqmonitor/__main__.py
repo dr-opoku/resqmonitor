@@ -23,6 +23,7 @@ def main(argv: list[str] | None = None) -> int:
     inspect_parser.add_argument("csv", type=Path)
     inspect_parser.add_argument("--config", type=Path)
     inspect_parser.add_argument("--baseline", type=Path)
+    inspect_parser.add_argument("--at", help="Timezone-aware ISO evaluation timestamp; otherwise current UTC.")
     for command in (demo_parser, inspect_parser):
         command.add_argument("--format", choices=("text", "json", "html"), default="text")
         command.add_argument("--output", type=Path, help="Write this file instead of stdout.")
@@ -41,6 +42,7 @@ def main(argv: list[str] | None = None) -> int:
             report = analyze(
                 read_file(args.csv), config,
                 baseline_csv=read_file(args.baseline) if args.baseline else None,
+                at=args.at,
             )
         output = {"text": as_text, "json": as_json, "html": as_html}[args.format](report)
         if args.output:
@@ -52,7 +54,7 @@ def main(argv: list[str] | None = None) -> int:
     except (OSError, ValueError, ImportError, OverflowError) as exc:
         if getattr(args, "format", None) == "json":
             sys.stdout.write(as_json({
-                "schema_version": "1.0", "tool": "resqmonitor", "status": "error",
+                "schema_version": "2.0", "tool": "resqmonitor", "status": "error",
                 "error": {"code": "INVALID_INPUT", "message": str(exc)},
             }))
         else:

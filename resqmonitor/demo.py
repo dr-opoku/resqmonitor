@@ -8,7 +8,7 @@ from typing import Any
 from ._support import json_object
 from .engine import analyze
 
-SCENARIOS = ("healthy", "degraded", "unknown")
+SCENARIOS = ("healthy", "degraded", "unknown", "small_sample")
 DEMO_AT = "2026-10-13T12:00:00Z"
 
 

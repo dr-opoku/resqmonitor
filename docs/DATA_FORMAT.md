@@ -12,9 +12,9 @@ T002,refund,,0.90,0.02,200,business
 
 T002 is pending. Required headers are the configured ID, prediction, and outcome columns. Missing ID/prediction makes a row invalid. Duplicate IDs exclude **all** their occurrences from accuracy, preventing an arbitrary first record from becoming the truth. ID values are not included in reports. Record numbers start at 1 after the header and refer to parsed records, not physical CSV lines.
 
-Prediction and outcome labels use exact, case-sensitive string matching after trimming. Distinct IDs should identify attempts, not only business entities. Include unsuccessful and pending attempts rather than selecting successful cases. Both current and baseline must follow the same definition. The monitor cannot detect omitted attempts.
+Prediction and outcome labels use exact, case-sensitive string matching after trimming. Distinct IDs should identify attempts, not only business entities. Include incorrect and pending classification outputs rather than selecting correct cases. A no-output failure is not a valid classification record; use separate workflow accounting for those failures. Both current and baseline must follow the same definition. The monitor cannot detect omitted attempts.
 
-Optional confidence is the supplied probability of the chosen prediction being correct, between 0 and 1. Cost and latency must be finite and nonnegative; latency is in milliseconds. Missing or invalid cells in present measurement columns produce findings. Set an optional column role to null to disable it. All costs must use one declared unit/currency; no conversion is performed. Include retries and other attributable costs upstream.
+Optional confidence is the supplied probability of the chosen prediction being correct, between 0 and 1. Cost and latency must be finite and nonnegative; latency is in milliseconds. Missing or invalid cells in present measurement columns produce findings. Set an optional column role to null to disable it. All costs must use one declared unit/currency; no conversion is performed. Allocate retries and other attributable costs to the defined output cohort upstream. This is not full workflow-attempt accounting.
 
 Optional groups support descriptive breakdowns and case-mix comparison. Category and group names are included in reports and may need anonymization.
 
@@ -34,7 +34,9 @@ A JSON object with known, unique keys and finite numeric values. Partial configu
 | `group_column` | group | Optional column name, or null |
 | `cost_unit` | EUR | User-declared cost unit; no currency inference |
 | `min_evaluated_rows` | 30 | Positive minimum for accuracy, confidence, cost, and baseline verdicts |
-| `min_accuracy_pct` | 85 | Minimum point accuracy |
+| `min_accuracy_pct` | 85 | Minimum accuracy on the selected threshold basis |
+| `accuracy_threshold_basis` | point_estimate | point_estimate or wilson_lower_bound (95% interval) |
+| `evidence_context` | {} | Optional purpose, population, sampling_method and reference_basis declarations; each string up to 2000 characters or null |
 | `min_outcome_coverage_pct` | 90 | Minimum valid completed outcomes / all rows |
 | `max_confidence_gap_pp` | 10 | Maximum absolute mean-confidence / paired-accuracy gap |
 | `allowed_accuracy_drop_pp` | 10 | Maximum descriptive accuracy drop from baseline |
@@ -46,6 +48,14 @@ Percent and percentage-point thresholds are between 0 and 100 inclusive. [Bundle
 
 ## Report contract
 
-`schema_version: 1.0`; `status: ok|attention|unknown`; named `checks` with value, unit, status, message, and evidence. A value may be measured while its verdict is unknown due to insufficient evidence. `summary` gives raw/evaluated/correct/pending/invalid counts and a 95% Wilson interval. `baseline_summary` and `groups` expose comparison evidence. Consumers should tolerate additional fields and use names rather than positional order.
+`schema_version: 2.0`; `status: ok|attention|unknown`; named `checks` with value, unit, status, message, and evidence. A value may be measured while its verdict is unknown due to insufficient evidence. `summary` gives raw/evaluated/correct/pending/invalid counts and a 95% Wilson interval. `baseline_summary` and `groups` expose comparison evidence. Consumers should tolerate additional fields and use names rather than positional order.
 
 The JSON CLI returns invalid-input/execution errors as `status: error` and `error: {code, message}` on stdout, including when an output path was requested. The optional MCP SDK reports raised invalid-input exceptions through its standard tool-error mechanism.
+
+### Evidence contract 2.0
+
+Each check exposes `value`, `threshold_status`, `evidence_status`, `status`, `threshold` and `reason_codes`. See [field semantics](EVIDENCE_POLICY.md#reading-the-report) and the [normal-report JSON Schema](report.schema.json). The same typed shape is exposed as the optional MCP output schema. Error objects are a separate CLI contract; MCP tool errors are separate from normal reports.
+
+The report adds `decision`, `policy` and `provenance`. Read `decision.required_checks` for overall scope. Context is caller-declared and is not validated against the world. Reports expose supplied policy/context, column and category names; omit identifying details if they are unnecessary.
+
+Migration from 1.0: check names and observed values remain accessible, but verdict rules are stricter. A diagnostic without a configured target no longer silently receives `ok`. Missing evidence stays unknown; insufficient observations can still have a passing numeric threshold comparison. Check schema version explicitly before relying on these meanings.

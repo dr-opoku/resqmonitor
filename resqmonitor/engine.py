@@ -4,10 +4,11 @@ from __future__ import annotations
 
 import math
 from collections import Counter
+from copy import deepcopy
 from datetime import datetime
 from typing import Any
 
-from ._support import check, finite_number, numeric_cell, overall, read_csv, reference_time
+from ._support import assessment_metadata, check, evidence_context, finite_number, numeric_cell, overall, read_csv, reference_time
 
 DEFAULTS: dict[str, Any] = {
     "dataset_name": "Local classification results",
@@ -21,6 +22,8 @@ DEFAULTS: dict[str, Any] = {
     "cost_unit": "EUR",
     "min_evaluated_rows": 30,
     "min_accuracy_pct": 85,
+    "accuracy_threshold_basis": "point_estimate",
+    "evidence_context": {},
     "min_outcome_coverage_pct": 90,
     "max_confidence_gap_pp": 10,
     "allowed_accuracy_drop_pp": 10,
@@ -37,7 +40,10 @@ def configuration(supplied: dict[str, Any] | None) -> dict[str, Any]:
     extra = set(supplied) - set(DEFAULTS)
     if extra:
         raise ValueError(f"Unknown configuration keys: {', '.join(sorted(extra))}")
-    cfg = {**DEFAULTS, **supplied}
+    cfg = deepcopy({**DEFAULTS, **supplied})
+    cfg["evidence_context"] = evidence_context(cfg["evidence_context"])
+    if cfg["accuracy_threshold_basis"] not in ("point_estimate", "wilson_lower_bound"):
+        raise ValueError("accuracy_threshold_basis must be point_estimate or wilson_lower_bound.")
     required_names = ("dataset_name", "id_column", "prediction_column", "outcome_column", "cost_unit")
     for name in required_names:
         if not isinstance(cfg[name], str) or not cfg[name].strip():
@@ -75,7 +81,7 @@ def wilson_interval(correct: int, total: int) -> list[float] | None:
     denominator = 1 + z * z / total
     center = (rate + z * z / (2 * total)) / denominator
     margin = z * math.sqrt(rate * (1 - rate) / total + z * z / (4 * total * total)) / denominator
-    return [round(100 * max(0, center - margin), 6), round(100 * min(1, center + margin), 6)]
+    return [100 * max(0, center - margin), 100 * min(1, center + margin)]
 
 
 def _sample(csv_text: str, cfg: dict[str, Any], label: str) -> dict[str, Any]:
@@ -155,7 +161,7 @@ def _groups(sample: dict[str, Any], cfg: dict[str, Any]) -> dict[str, Any]:
 
 def analyze(csv_text: str, config: dict[str, Any] | None = None, *,
             baseline_csv: str | None = None, at: str | datetime | None = None) -> dict[str, Any]:
-    """Analyze categorical predictions. Ground-truth labels must be supplied by the caller."""
+    """Analyze categorical predictions against reference labels supplied by the caller."""
     cfg = configuration(config)
     current = _sample(csv_text, cfg, "Current")
     summary = current["summary"]
@@ -172,14 +178,32 @@ def analyze(csv_text: str, config: dict[str, Any] | None = None, *,
             "message": "Missing IDs/predictions and every occurrence of duplicate IDs are excluded from accuracy.",
         })
     checks: dict[str, dict[str, Any]] = {}
+    accuracy_issues = []
+    if not evaluated:
+        accuracy_issues.append("NO_OBSERVATIONS")
+    elif not enough:
+        accuracy_issues.append("BELOW_MIN_SAMPLE")
+    if total and summary["outcome_coverage_pct"] < cfg["min_outcome_coverage_pct"]:
+        accuracy_issues.append("LOW_OUTCOME_COVERAGE")
+    if summary["invalid_rows"]:
+        accuracy_issues.append("INVALID_RESULT_ROWS")
+    accuracy_basis = cfg["accuracy_threshold_basis"]
+    accuracy_assessment = (summary["accuracy_wilson_95_pct"][0]
+                           if accuracy_basis == "wilson_lower_bound" and evaluated
+                           else summary["accuracy_pct"])
     checks["accuracy"] = check(
         "Observed accuracy", summary["accuracy_pct"], "%",
         {"correct_rows": correct, "evaluated_rows": evaluated,
          "minimum_evaluated_rows": cfg["min_evaluated_rows"],
          "wilson_95_interval_pct": summary["accuracy_wilson_95_pct"],
+         "outcome_coverage_pct": summary["outcome_coverage_pct"],
+         "minimum_outcome_coverage_pct": cfg["min_outcome_coverage_pct"],
+         "interval_assumptions": "independent_binomial_sample_not_verified",
          "minimum_accuracy_pct": cfg["min_accuracy_pct"]},
-        "Exact label matches among valid, completed outcomes. Small samples keep an unknown verdict.",
+        "Exact label matches among supplied reference outcomes. Count, outcome coverage and valid records govern the verdict.",
         minimum=cfg["min_accuracy_pct"], enough_evidence=enough,
+        evidence_issues=accuracy_issues, assessment_value=accuracy_assessment,
+        threshold_basis=accuracy_basis,
     )
     checks["outcome_coverage"] = check(
         "Outcome coverage", summary["outcome_coverage_pct"], "%",
@@ -212,6 +236,10 @@ def analyze(csv_text: str, config: dict[str, Any] | None = None, *,
         "Absolute gap between mean reported confidence and accuracy on paired rows; this is a warning heuristic.",
         maximum=cfg["max_confidence_gap_pp"],
         enough_evidence=len(paired) >= cfg["min_evaluated_rows"] and len(paired) == evaluated,
+        evidence_issues=(["NO_OBSERVATIONS"] if not paired else [])
+        + (["BELOW_MIN_SAMPLE"] if paired and len(paired) < cfg["min_evaluated_rows"] else [])
+        + (["INCOMPLETE_MEASUREMENTS"] if len(paired) < evaluated else [])
+        + accuracy_issues,
     )
     # Divide before summing to keep finite, very large inputs from overflowing intermediates.
     cost_complete = len(cost) == total and evaluated == total and enough and correct > 0
@@ -222,14 +250,24 @@ def analyze(csv_text: str, config: dict[str, Any] | None = None, *,
     if cost_per_correct is not None and not math.isfinite(cost_per_correct):
         raise ValueError("Cost per correct result exceeds the finite numeric range.")
     known_cost = sum(cost.values())
+    cost_issues = ([] if total else ["NO_OBSERVATIONS"])
+    if total and len(cost) != total:
+        cost_issues.append("INCOMPLETE_MEASUREMENTS")
+    if total and evaluated != total:
+        cost_issues.append("INCOMPLETE_OUTCOMES")
+    if evaluated and not enough:
+        cost_issues.append("BELOW_MIN_SAMPLE")
+    if total and not correct:
+        cost_issues.append("NO_CORRECT_OUTCOMES")
     checks["cost_per_correct"] = check(
         "Cost per correct result", cost_per_correct, cfg["cost_unit"],
         {"cost_rows": len(cost), "all_rows": total, "correct_rows": correct,
          "known_total_cost": known_cost if math.isfinite(known_cost) else None,
          "cost_unit": cfg["cost_unit"], "maximum": cfg["max_cost_per_correct"],
          "all_outcomes_complete": evaluated == total and total > 0},
-        "Total cost of all supplied attempts divided by correct outcomes. Incomplete or zero-success samples are unknown.",
+        "Total cost of supplied classification outputs divided by correct outcomes. Incomplete or zero-success samples are unknown.",
         maximum=cfg["max_cost_per_correct"],
+        evidence_issues=cost_issues,
     )
     mean_latency = math.fsum(value / len(latency) for value in latency.values()) if latency else None
     ordered_latency = sorted(latency.values())
@@ -240,6 +278,8 @@ def analyze(csv_text: str, config: dict[str, Any] | None = None, *,
          "maximum_mean_ms": cfg["max_mean_latency_ms"]},
         "Mean and nearest-rank p95 over instrumented rows; incomplete latency coverage keeps the verdict unknown.",
         maximum=cfg["max_mean_latency_ms"], enough_evidence=bool(total) and len(latency) == total,
+        evidence_issues=(["NO_OBSERVATIONS"] if not latency else [])
+        + (["INCOMPLETE_MEASUREMENTS"] if total and len(latency) != total else []),
     )
     groups = _groups(current, cfg)
     baseline = _sample(baseline_csv, cfg, "Baseline") if baseline_csv is not None else None
@@ -270,6 +310,8 @@ def analyze(csv_text: str, config: dict[str, Any] | None = None, *,
          "allowed_drop_pp": cfg["allowed_accuracy_drop_pp"]},
         "Current minus baseline accuracy. Samples and outcome coverage must meet their minimums; this is descriptive, not causal.",
         minimum=-cfg["allowed_accuracy_drop_pp"], enough_evidence=comparable,
+        evidence_issues=(["NO_OBSERVATIONS"] if baseline is None else [])
+        + (["COMPARISON_GUARDRAILS_NOT_MET"] if baseline is not None and not comparable else []),
     )
     shift = None
     group_coverage = (
@@ -289,6 +331,9 @@ def analyze(csv_text: str, config: dict[str, Any] | None = None, *,
          "maximum_shift_pct": cfg["max_case_mix_shift_pct"]},
         "Total variation in supplied group shares. Changed case mix may affect accuracy comparisons.",
         maximum=cfg["max_case_mix_shift_pct"], enough_evidence=comparable and bool(group_coverage),
+        evidence_issues=(["NO_OBSERVATIONS"] if baseline is None else [])
+        + (["COMPARISON_GUARDRAILS_NOT_MET"] if baseline is not None and not comparable else [])
+        + (["INCOMPLETE_GROUP_ASSIGNMENT"] if baseline is not None and not group_coverage else []),
     )
     critical = ["accuracy", "outcome_coverage"]
     if cfg["confidence_column"] in current["header"]:
@@ -304,19 +349,23 @@ def analyze(csv_text: str, config: dict[str, Any] | None = None, *,
     for name in critical:
         if checks[name]["status"] == "attention":
             findings.append({"code": f"CHECK_{name.upper()}", "message": f"{checks[name]['label']} does not meet its configured threshold."})
+    status = overall([checks[name] for name in critical], findings)
     return {
-        "schema_version": "1.0", "tool": "resqmonitor", "dataset": cfg["dataset_name"],
+        "schema_version": "2.0", "tool": "resqmonitor", "dataset": cfg["dataset_name"],
         "evaluated_at": reference_time(at).isoformat(), "synthetic": False,
-        "status": overall([checks[name] for name in critical], findings),
+        "status": status,
+        **assessment_metadata(cfg, {"current": csv_text, "baseline": baseline_csv}, status, critical),
         "summary": summary, "checks": checks, "findings": findings,
         "baseline_summary": baseline_summary, "groups": groups,
         "notes": [
             "Overall status covers: " + ", ".join(critical) + ". Other diagnostics remain separately visible.",
             "Outcome labels are supplied evidence, not independently established ground truth.",
+            "Evidence sufficiency means declared local guardrails are met; reference validity and generalization are not assessed.",
+            "Input fingerprints identify supplied text; they do not authenticate its source or authorize agent actions.",
             "Exact-match classification metrics do not assess free-form text quality or safety.",
             "Sample-size limits and Wilson intervals do not establish representativeness or causal model regression.",
             "Group accuracies below the minimum evaluated count are descriptive only; check subgroup counts separately.",
             "Reports include aggregate counts, category/group names and record numbers, not IDs or raw rows.",
-            "Include failed attempts and retries in costs upstream; use one declared currency/unit without conversion.",
+            "These records describe classification outputs. Account for retries upstream; no-output failures need separate workflow accounting.",
         ],
     }

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import io
 import json
 import math
@@ -115,19 +116,81 @@ def string_list(value: Any, name: str, allow_empty: bool = True) -> list[str]:
     return value
 
 
+def evidence_context(value: Any) -> dict[str, str | None]:
+    """Keep caller declarations separate from verified observations."""
+    keys = ("purpose", "population", "sampling_method", "reference_basis")
+    if not isinstance(value, dict) or set(value) - set(keys):
+        raise ValueError("evidence_context accepts purpose, population, sampling_method and reference_basis.")
+    context = {key: value.get(key) for key in keys}
+    for key, text in context.items():
+        if text is not None and (not isinstance(text, str) or not text.strip() or len(text) > 2000):
+            raise ValueError(f"evidence_context.{key} must be a nonempty string up to 2000 characters, or null.")
+    return context
+
+
+def assessment_metadata(cfg: dict[str, Any], inputs: dict[str, str | None],
+                        status: str, required: list[str]) -> dict[str, Any]:
+    """Fingerprints identify supplied artifacts; they do not authenticate their origin."""
+    policy_text = json.dumps(cfg, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+    return {
+        "decision": {
+            "outcome": {"ok": "criteria_met", "attention": "criteria_not_met", "unknown": "undetermined"}[status],
+            "scope": "supplied_observations", "required_checks": required,
+            "action_authorized": False,
+        },
+        "policy": cfg,
+        "provenance": {
+            "input_sha256": {name: hashlib.sha256(text.encode("utf-8")).hexdigest() if text is not None else None
+                             for name, text in inputs.items()},
+            "policy_sha256": hashlib.sha256(policy_text.encode("utf-8")).hexdigest(),
+            "source_verification": "not_performed",
+            "context_verification": "not_performed",
+            "generalization": "not_assessed",
+        },
+    }
+
+
 def check(label: str, value: float | None, unit: str, evidence: dict[str, Any],
           message: str, minimum: float | None = None, maximum: float | None = None,
-          enough_evidence: bool = True) -> dict[str, Any]:
-    if value is None or not enough_evidence:
-        status = "unknown"
-    elif (minimum is not None and value < minimum) or (maximum is not None and value > maximum):
-        status = "attention"
+          enough_evidence: bool = True, evidence_issues: list[str] | None = None,
+          assessment_value: float | None = None, threshold_basis: str = "point_estimate") -> dict[str, Any]:
+    assessed = value if assessment_value is None else assessment_value
+    target_set = minimum is not None or maximum is not None
+    if assessed is None or not target_set:
+        threshold_status = "unknown"
+    elif (minimum is not None and assessed < minimum) or (maximum is not None and assessed > maximum):
+        threshold_status = "attention"
     else:
-        status = "ok"
+        threshold_status = "ok"
+    issues = list(dict.fromkeys(evidence_issues or []))
+    if not issues and not enough_evidence:
+        issues.append("INSUFFICIENT_EVIDENCE")
+    if not issues and value is None:
+        issues.append("NO_OBSERVATIONS")
+    if any(code.startswith("INVALID_") for code in issues):
+        evidence_status = "invalid"
+    elif "RULE_NOT_CONFIGURED" in issues:
+        evidence_status = "not_configured"
+    elif "NO_OBSERVATIONS" in issues:
+        evidence_status = "missing"
+    elif issues:
+        evidence_status = "insufficient"
+    else:
+        evidence_status = "sufficient"
+    reasons = issues.copy()
+    if not target_set:
+        reasons.append("THRESHOLD_NOT_CONFIGURED")
+    elif threshold_status == "attention":
+        reasons.append("THRESHOLD_NOT_MET")
+    status = threshold_status if evidence_status == "sufficient" else "unknown"
     return {
         "label": label, "status": status,
         "value": round(value, 6) if value is not None else None,
         "unit": unit, "message": message, "evidence": evidence,
+        "threshold_status": threshold_status, "evidence_status": evidence_status,
+        "reason_codes": reasons,
+        "threshold": {"minimum": minimum, "maximum": maximum, "basis": threshold_basis,
+                      "assessment_value": round(assessed, 6) if assessed is not None else None},
     }
 
 

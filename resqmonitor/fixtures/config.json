@@ -8,5 +8,11 @@
   "allowed_accuracy_drop_pp": 10,
   "max_case_mix_shift_pct": 20,
   "max_cost_per_correct": 0.05,
-  "max_mean_latency_ms": 300
+  "max_mean_latency_ms": 300,
+  "evidence_context": {
+    "purpose": "Illustrate declared acceptance criteria with synthetic observations.",
+    "population": "Bundled synthetic examples only.",
+    "sampling_method": "Constructed fixtures; not a random or production sample.",
+    "reference_basis": "Constructed reference labels; no independent real-world adjudication."
+  }
 }
