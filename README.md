@@ -4,6 +4,10 @@
 
 A small, local monitor for categorical predictions and supplied outcome labels. It reports accuracy, outcome coverage, confidence alignment, cost per correct result, latency, and changes from a baseline. The core uses no AI model, account, database, or network connection.
 
+### Related example
+
+[`dataqmonitor`](https://github.com/dr-opoku/dataqmonitor) covers an earlier decision point: whether incoming data is complete, fresh, and consistent enough to proceed. The two repositories are independent examples, not a connected pipeline.
+
 ## Try it in one command
 
 Requires Python **3.11 or newer**. From this repository directory:
