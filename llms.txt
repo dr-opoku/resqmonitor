@@ -1,0 +1,19 @@
+# resqmonitor
+
+Local exact-match classification result monitoring. Python >=3.11. No core runtime dependencies or model calls.
+
+- Discover: README.md, showcase.json, docs/DATA_FORMAT.md, docs/METRICS.md.
+- Demo: python3 -m resqmonitor demo --format json
+- Alternatives: add --scenario healthy or --scenario unknown.
+- Supplied results: python3 -m resqmonitor check CURRENT.csv --baseline BASELINE.csv --config CONFIG.json --format json
+- Minimum CSV headers: record_id,predicted_label,actual_label. Blank actual_label means pending, not a prediction to be generated.
+- Optional confidence (0..1), nonnegative cost, nonnegative latency_ms, group. Map names or disable optional roles in config.
+- Reports: schema_version 1.0; status ok/attention/unknown; check value may exist while its verdict is unknown. Read evidence and overall scope notes.
+- Exit 0 means calculation completed, not quality passed. --require-ok enables exit 1 unless ok. Invalid input/execution errors exit 2.
+- Each CSV: <=5 MiB, <=50,000 records, <=100 distinct labels and <=100 groups. Unique trimmed headers; finite numbers.
+- All duplicate-ID occurrences are excluded from accuracy; they remain in coverage's denominator. IDs themselves are not reported.
+- Default minimum: 30 evaluated rows, a configurable guardrail, not a guarantee. Unknown must never be treated as a pass.
+- Confidence gap is a heuristic, not calibration proof. Baseline delta is descriptive, not causal. Outcome labels are caller-provided evidence.
+- Reports include categorical/group names; anonymize them if necessary. No telemetry or automatic persistence.
+- Optional .[mcp] extra; serve over local stdio. inspect_results accepts inline CSV/config, not file paths. demonstrate_result_quality uses packaged synthetic fixtures.
+- Source visibility alone is not a license. Redistribution license is pending.

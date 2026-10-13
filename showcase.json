@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "name": "resqmonitor",
+  "version": "0.1.0",
+  "purpose": "Inspect supplied categorical predictions and outcomes",
+  "repository": "https://github.com/dr-opoku/resqmonitor",
+  "runtime": {
+    "python": ">=3.11",
+    "core_dependencies": [],
+    "network_required": false,
+    "model_required": false
+  },
+  "demo": {
+    "command": [
+      "python3",
+      "-m",
+      "resqmonitor",
+      "demo",
+      "--format",
+      "json"
+    ],
+    "synthetic": true,
+    "reference_time": "2026-10-13T12:00:00Z"
+  },
+  "outputs": [
+    "text",
+    "json",
+    "html"
+  ],
+  "report_schema_version": "1.0",
+  "mcp": {
+    "optional_extra": "mcp",
+    "transport": "stdio",
+    "command": [
+      "resqmonitor",
+      "serve"
+    ]
+  },
+  "limits": {
+    "csv_bytes": 5242880,
+    "csv_records": 50000
+  },
+  "license": {
+    "status": "not_selected"
+  }
+}

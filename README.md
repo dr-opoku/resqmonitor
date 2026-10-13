@@ -1,2 +1,120 @@
 # resqmonitor
-Results and quality monitoring
+
+**Are the results still good enough—and what does a correct result cost?**
+
+A small, local monitor for categorical predictions and supplied outcome labels. It reports accuracy, outcome coverage, confidence alignment, cost per correct result, latency, and changes from a baseline. The core uses no AI model, account, database, or network connection.
+
+## Try it in one command
+
+Requires Python **3.11 or newer**. From this repository directory:
+
+```bash
+python3 -m resqmonitor demo
+```
+
+The default demo compares a synthetic ticket classifier with an earlier synthetic baseline. Confidence stays high while accuracy falls and cost and latency rise. These are designed examples, not observations about a real model.
+
+```bash
+python3 -m resqmonitor demo --scenario healthy
+python3 -m resqmonitor demo --scenario unknown
+python3 -m resqmonitor demo --format json
+python3 -m resqmonitor demo --format html --output outputs/result-quality.html
+```
+
+Open the generated HTML locally. There are no external assets or scripts. All demos carry a synthetic label and a fixed reference time of **13 October 2026, 12:00 UTC**.
+
+| Scenario | Supplied synthetic evidence |
+| --- | --- |
+| `healthy` | 38 of 40 correct, compared with 36 of 40 in the baseline; lower cost and latency |
+| `degraded` | 26 of 40 correct; confidence 94%; higher cost and latency |
+| `unknown` | A valid header with no current observations; no quality verdict |
+
+**Accuracy is accompanied by its denominator.** Fewer than 30 evaluated rows by default leave the accuracy verdict unknown, even if an observed percentage is available. Thirty is a configurable guardrail, not a statistical guarantee. Small subgroup samples are flagged separately.
+
+## Use your own results
+
+Export one row per distinct prediction attempt. Include the actual label once it becomes available; leave it blank while pending. Never let the tool invent the outcome label.
+
+```bash
+python3 -m resqmonitor check local_data/current.csv \
+  --baseline local_data/baseline.csv \
+  --config resqmonitor/fixtures/config.json \
+  --format html --output outputs/results-report.html
+```
+
+A minimal CSV needs `record_id`, `predicted_label`, and `actual_label`. Confidence, cost, latency, groups, and a baseline are optional. Column names and tolerances can be changed in JSON. Start with `check your.csv` if you only have labels.
+
+| Measurement | Practical question |
+| --- | --- |
+| Observed accuracy | How many valid, completed outcomes match their predictions exactly? |
+| Outcome coverage | What share of all supplied rows has a valid completed outcome? |
+| Confidence alignment | Is reported confidence far from accuracy on the same paired sample? |
+| Cost per correct result | How much did all attempts cost per correct outcome? |
+| Latency | What are the mean and p95 of instrumented durations? |
+| Baseline accuracy | Has observed accuracy fallen beyond the configured tolerance? |
+| Case mix | Have the supplied group shares changed enough to affect interpretation? |
+
+See [data format](docs/DATA_FORMAT.md) and [metric definitions](docs/METRICS.md). This first version addresses **exact-match classification**, not free-form response quality or safety.
+
+## People, scripts, and agents
+
+- Text for a terminal; JSON for automation; HTML for a local report.
+- Python: `from resqmonitor import analyze`, then `analyze(csv_text, config, baseline_csv=baseline_text)`.
+- Optional MCP over local stdio, with tools accepting CSV text rather than paths.
+
+JSON reports include `schema_version`, `status`, `summary`, `checks`, `findings`, and `notes`. Each check exposes a value, unit, verdict, and denominator evidence. Overall status states which checks it includes. Diagnostics can be unknown even when the configured overall assessment is ok. [llms.txt](llms.txt) gives concise agent guidance; [showcase.json](showcase.json) is project metadata, not a commerce or interoperability standard.
+
+A completed report exits **0**, including attention or unknown results. Use `--require-ok` to exit **1** unless overall status is ok. Invalid input or an execution error exits **2**; JSON mode emits an error object on stdout. Argument-parser errors use argparse's stderr output.
+
+### Install a command or MCP support
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install .
+.venv/bin/resqmonitor demo
+```
+
+The core has no runtime dependencies. The optional MCP adapter uses the official [MCP Python SDK](https://py.sdk.modelcontextprotocol.io/servers/tools/):
+
+```bash
+.venv/bin/python -m pip install '.[mcp]'
+.venv/bin/resqmonitor serve
+```
+
+Example client entry, adapting the executable path to your checkout:
+
+```json
+{
+  "mcpServers": {
+    "resqmonitor": {
+      "command": "/absolute/path/to/resqmonitor/.venv/bin/resqmonitor",
+      "args": ["serve"]
+    }
+  }
+}
+```
+
+Tools: `inspect_results(csv_text, config?, baseline_csv?)` and `demonstrate_result_quality(scenario?)`. They do not access caller-supplied filesystem paths, contact services, call models, or generate outcome labels. The demo tool reads only bundled synthetic fixtures. A remote agent client may transmit supplied CSV text; select your client according to your data requirements.
+
+## What this demonstrates
+
+A focused example of judging an automated workflow by observable results and operating cost. It makes missing outcomes, inadequate samples, and changed case mix visible before drawing a quality conclusion. See [showcase context](docs/SHOWCASE.md).
+
+The monitor neither establishes ground truth nor proves a causal model regression. Baseline comparability depends on how you collect labels, select samples, define groups, and account for retries. Reports include category and group names, which may be sensitive; use synthetic examples when sharing.
+
+The code is self-contained and newly written for this repository. No private platform implementation is required.
+
+## Repository map
+
+```text
+resqmonitor/engine.py       metrics and configuration validation
+resqmonitor/_support.py     bounded CSV/JSON input handling
+resqmonitor/report.py       text, JSON, and standalone HTML output
+resqmonitor/fixtures/       synthetic current/baseline inputs and configuration
+resqmonitor/mcp_server.py   optional, thin local adapter
+docs/                      data contract, metrics, showcase context
+```
+
+## License and release status
+
+Initial showcase implementation. A redistribution license has not yet been selected. License selection is an owner decision before public release. Synthetic examples do not establish production performance.

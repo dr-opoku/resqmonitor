@@ -1,0 +1,12 @@
+{
+  "dataset_name": "Synthetic ticket classification",
+  "cost_unit": "EUR",
+  "min_evaluated_rows": 30,
+  "min_accuracy_pct": 85,
+  "min_outcome_coverage_pct": 90,
+  "max_confidence_gap_pp": 10,
+  "allowed_accuracy_drop_pp": 10,
+  "max_case_mix_shift_pct": 20,
+  "max_cost_per_correct": 0.05,
+  "max_mean_latency_ms": 300
+}
