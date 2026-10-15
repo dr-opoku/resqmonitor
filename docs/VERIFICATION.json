@@ -35,9 +35,27 @@
       "3.11",
       "3.13"
     ],
-    "github_execution": "not_yet_observed",
+    "github_execution": "success",
     "model_or_credentials_needed": false,
-    "token_contents": "read"
+    "token_contents": "read",
+    "observed_at": "2026-10-15T09:12:01.632939+00:00",
+    "observed_source_commit": "633d21eb06aeff6c47ed080ccf4f56a038a81bb2",
+    "run_url": "https://github.com/dr-opoku/resqmonitor/actions/runs/38711055134",
+    "jobs": [
+      {
+        "name": "core (3.13)",
+        "conclusion": "success"
+      },
+      {
+        "name": "optional-mcp",
+        "conclusion": "success"
+      },
+      {
+        "name": "core (3.11)",
+        "conclusion": "success"
+      }
+    ],
+    "record_scope": "Observed successful run at the stated implementation commit. This subsequent verification-record-only commit triggers its own checks."
   },
   "pre_edit_stress_review": {
     "passed": true,
