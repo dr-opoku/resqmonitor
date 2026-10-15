@@ -39,6 +39,10 @@ The reference can support a conversation about specifying a decision, defining e
 
 The report producer compares unrounded measurements and displays six decimals. The example consumer therefore permits either consistent verdict within the display-rounding interval at a threshold. Tests cover these boundaries and reject clearly inconsistent comparisons. The consumer cannot independently recompute an exact comparison from rounded display values.
 
+## Python-version regression found by GitHub CI
+
+The first Python 3.11 CI replay exposed different floating-point aggregates from Python 3.12. A focused regression test reproduced the failure before the repair. Explicit `math.fsum` accumulation now reproduces the stored examples on both locally available versions. Original responses, frozen requirements and sample eligibility outcomes were preserved. An unrepresentable total cost remains null, as before.
+
 ## Verification and remaining decisions
 
 See [verification results](VERIFICATION.json), [the action plan](ACTION_PLAN.json) and [project status](PROJECT_STATUS.md). Automated tests and saved-report replay check the implementation and its declared examples. They cannot establish label truth, representative sampling, model authenticity or deployment suitability.

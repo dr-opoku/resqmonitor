@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "repository": "resqmonitor",
-  "checked_at": "2026-10-15T06:52:05.096940+00:00",
+  "checked_at": "2026-10-15T06:56:34.339978+00:00",
   "python": "3.12.3",
   "tests": {
-    "discovered": 33,
-    "passed": 33,
+    "discovered": 34,
+    "passed": 34,
     "failed": 0,
     "skipped": 0,
     "command": "python3 -m unittest discover -s tests -v"
@@ -35,9 +35,27 @@
       "3.11",
       "3.13"
     ],
-    "github_execution": "not_yet_observed",
+    "github_execution": "success",
     "model_or_credentials_needed": false,
-    "token_contents": "read"
+    "token_contents": "read",
+    "initial_failure": "Python 3.11 float sum produced different displayed aggregates; replaced with explicit stable accumulation and reproduced the regression before repair.",
+    "observed_source_commit": "27ab4169c1a4fd5e2583e5c93c7c241995e1cbca",
+    "run_url": "https://github.com/dr-opoku/resqmonitor/actions/runs/38695576295",
+    "jobs": [
+      {
+        "name": "core (3.11)",
+        "conclusion": "success"
+      },
+      {
+        "name": "core (3.13)",
+        "conclusion": "success"
+      },
+      {
+        "name": "optional-mcp",
+        "conclusion": "success"
+      }
+    ],
+    "record_scope": "Observed run at the stated source commit; later documentation-only commits trigger separate runs."
   },
   "pre_edit_stress_review": {
     "passed": true,
@@ -62,10 +80,17 @@
     "wheel_demo_scenarios": 4,
     "wheel_saved_report_comparison": "matched",
     "real_capture_wheel_replay": false,
-    "sdist_tests_discovered": 33,
-    "sdist_tests_passed": 29,
+    "sdist_tests_discovered": 34,
+    "sdist_tests_passed": 30,
     "sdist_tests_skipped": 4,
     "sdist_skips_reason": "Optional MCP SDK intentionally absent from clean core environment",
     "sdist_saved_report_reproduction": "passed"
+  },
+  "additional_python311_core": {
+    "python": "3.11.17",
+    "tests": 34,
+    "passed": 30,
+    "skipped_optional_mcp": 4,
+    "saved_reports_reproduce": true
   }
 }

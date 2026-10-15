@@ -64,6 +64,12 @@
       ],
       "acceptance": "Regression tests reproduce the original defects and exercise the repaired behavior; all input files remain byte-identical after refused collisions.",
       "status": "implemented_and_locally_verified"
+    },
+    {
+      "id": "ci_numeric_reproducibility",
+      "action": "Repair the Python 3.11/3.12 floating-point aggregate discrepancy exposed by the first GitHub example replay; use explicit stable accumulation.",
+      "acceptance": "A focused regression fails before the repair. Stored examples reproduce under both locally available versions; original responses, frozen policy and sample verdicts remain unchanged.",
+      "status": "implemented_and_locally_verified"
     }
   ],
   "pre_edit_gate": "Record baseline tests and one independent Gemini 3.8 Flash review of this plan and supplied source before repository edits. Revise actions against concrete findings.",
