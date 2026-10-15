@@ -5,12 +5,30 @@ from __future__ import annotations
 import argparse
 import sys
 from pathlib import Path
+from importlib.resources import files
 
 from . import __version__
 from ._support import json_object, read_file
 from .demo import SCENARIOS, demo
 from .engine import analyze
 from .report import as_html, as_json, as_text
+
+
+def protect_output(path, inputs):
+    """Refuse lexical, symlink and existing hard-link input/output aliases.
+
+    This prevents accidental overwrites, not concurrent hostile filesystem races.
+    """
+    if not path:
+        return
+    target = Path(path)
+    for item in inputs:
+        if item is None:
+            continue
+        source = Path(item)
+        if (target.resolve() == source.resolve() or
+                (target.exists() and source.exists() and target.samefile(source))):
+            raise ValueError("Output must not overwrite an input file")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -35,6 +53,10 @@ def main(argv: list[str] | None = None) -> int:
             from .mcp_server import serve
             serve()
             return 0
+        inputs = ([Path(str(item)) for item in files("resqmonitor").joinpath("fixtures").iterdir()]
+                  if args.command == "demo" else
+                  [args.csv, args.config, args.baseline])
+        protect_output(args.output, inputs)
         if args.command == "demo":
             report = demo(args.scenario)
         else:

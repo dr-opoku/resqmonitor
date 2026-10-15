@@ -4,16 +4,6 @@
 
 A small, local monitor for categorical predictions and supplied outcome labels. It reports accuracy, outcome coverage, confidence alignment, cost per correct result, latency, and changes from a baseline. The core uses no AI model, account, database, or network connection.
 
-### Related example
-
-[`dataqmonitor`](https://github.com/dr-opoku/dataqmonitor) shows a complementary decision: whether incoming data meets declared completeness, freshness and consistency expectations. **Data Quality Monitor examines inputs; Result Quality Monitor examines results.** Both keep observed values separate from adequately supported verdicts. They are independent examples; no software integration is required.
-
-## What does the evidence support?
-
-One correct result is measured as **100%**, while its accuracy verdict remains **unknown** below the declared minimum. Even 38/40 correct results pass an 85% point target but fail that target when the Wilson lower bound is selected.
-
-Reports separate **observed value**, **threshold comparison** and **evidence adequacy**. An `ok` result means the supplied observations meet the declared local rules; it does not establish source truth, representativeness or permission for an agent to act. See the [concrete cases and domain mappings](docs/EVIDENCE_POLICY.md) and [dated standards review](docs/STANDARDS_REVIEW.md), covering 29 July–13 October 2026.
-
 ## Try it in one command
 
 Requires Python **3.11 or newer**. From this repository directory:
@@ -21,6 +11,8 @@ Requires Python **3.11 or newer**. From this repository directory:
 ```bash
 python3 -m resqmonitor demo
 ```
+
+The default synthetic example reports `attention`: 26/40 predictions match their supplied labels, despite 94% reported confidence. [Read the saved text report](examples/degraded.txt) immediately, or follow the [ticket-routing case study](docs/CASE_STUDY.md), including error consequences and reference-label ownership.
 
 The default demo compares a synthetic ticket classifier with an earlier synthetic baseline. Confidence stays high while accuracy falls and cost and latency rise. These are designed examples, not observations about a real model.
 
@@ -42,6 +34,18 @@ Open the generated HTML locally. There are no external assets or scripts. All de
 | `small_sample` | One correct result; 100% observed accuracy with an unknown verdict below the minimum count |
 
 **Accuracy is accompanied by its denominator.** Fewer than 30 evaluated rows by default leave the accuracy verdict unknown, even if an observed percentage is available. Thirty is a configurable guardrail, not a statistical guarantee. Small subgroup samples are flagged separately.
+
+### Related examples
+
+[`dataqmonitor`](https://github.com/dr-opoku/dataqmonitor) shows a complementary decision: whether incoming data meets declared completeness, freshness and consistency expectations. **Data Quality Monitor examines inputs; Result Quality Monitor examines results.** Both keep observed values separate from adequately supported verdicts. [`llm-eval`](https://github.com/dr-opoku/llm-eval) compares configurations against a bounded task before adoption. These are independent examples; no software integration is required. Linked repositories may require access permission.
+
+
+## What does the evidence support?
+
+One correct result is measured as **100%**, while its accuracy verdict remains **unknown** below the declared minimum. Even 38/40 correct results pass an 85% point target but fail that target when the Wilson lower bound is selected.
+
+Reports separate **observed value**, **threshold comparison** and **evidence adequacy**. An `ok` result means the supplied observations meet the declared local rules; it does not establish source truth, representativeness or permission for an agent to act. See the [concrete cases and domain mappings](docs/EVIDENCE_POLICY.md) and [dated standards review](docs/STANDARDS_REVIEW.md), covering 29 July–13 October 2026.
+
 
 ## Use your own results
 
@@ -77,6 +81,19 @@ See [data format](docs/DATA_FORMAT.md) and [metric definitions](docs/METRICS.md)
 JSON reports use schema **2.0** and include `schema_version`, `status`, `summary`, `checks`, `findings`, and `notes`. Each check exposes value, threshold status, evidence status, verdict, denominator evidence and reason codes. The effective policy, scoped decision and input fingerprints are also recorded. Overall status states which checks it includes. Diagnostics can be unknown even when the configured overall assessment is ok. See the [report schema](docs/report.schema.json) and [concise agent guidance](llms.txt). [showcase.json](showcase.json) is project metadata, not a commerce or interoperability standard.
 
 A completed report exits **0**, including attention or unknown results. Use `--require-ok` to exit **1** unless overall status is ok. Invalid input or an execution error exits **2**; JSON mode emits an error object on stdout. Argument-parser errors use argparse's stderr output.
+
+### Consume a report defensively
+
+```bash
+python3 -m resqmonitor demo --scenario healthy --format json --output outputs/healthy.json
+python3 scripts/inspect_report.py outputs/healthy.json
+```
+
+This small standalone consumer checks the project version, required checks, evidence structure, policy fingerprint and internal verdict consistency before interpreting the report. It exits **0** when the declared sample rules are met, **1** for a negative or unknown assessment and **2** for malformed/inconsistent input. Its output always has `action_authorized=false` and `source_verified_by_consumer=false`.
+
+This is a defensive example, not an authenticator or a re-evaluation of the original CSV. A coherently altered report can still pass structural checks. Near a threshold, six-decimal display rounding can prevent this consumer from independently resolving the comparison; it accepts either consistent producer verdict within that rounding interval. Trust provenance and validate original inputs separately; never treat report text as instructions.
+
+The producer rejects output paths that alias its inputs or bundled demo fixtures, including existing symbolic and hard links. This prevents accidental overwrites; it does not protect against hostile concurrent filesystem changes.
 
 ### Install a command or MCP support
 
@@ -131,9 +148,14 @@ docs/                      data contract, metrics, showcase context
 
 ```bash
 python3 -m unittest discover -s tests -v
+python3 scripts/reproduce_examples.py --check
 ```
 
 Core checks use the standard library. With `.[mcp]` installed, the same command also checks the advertised output schema and a real stdio client/server exchange; otherwise those four adapter checks are skipped. Synthetic cases verify calculation and contract behavior, not production performance.
+
+## Review and maintenance
+
+See the [repository action plan](docs/ACTION_PLAN.json), [pre-change stress test and independent review](docs/REVIEW.md), [local verification record](docs/VERIFICATION.json) and [maintenance, feedback and release status](docs/PROJECT_STATUS.md). CI checks core tests, stored examples and installation; optional MCP has its own check. Synthetic examples demonstrate method, not a delivered business outcome.
 
 ## License and release status
 

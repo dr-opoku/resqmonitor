@@ -48,5 +48,23 @@
     "date": "2026-10-13",
     "window_start": "2026-07-29",
     "document": "docs/STANDARDS_REVIEW.md"
+  },
+  "related_repositories": [
+    "https://github.com/dr-opoku/dataqmonitor",
+    "https://github.com/dr-opoku/llm-eval"
+  ],
+  "case_study": "docs/CASE_STUDY.md",
+  "action_plan": "docs/ACTION_PLAN.json",
+  "review": "docs/REVIEW.md",
+  "project_status": "docs/PROJECT_STATUS.md",
+  "verification": "docs/VERIFICATION.json",
+  "report_consumer": {
+    "command": "python3 scripts/inspect_report.py REPORT.json",
+    "exit_codes": {
+      "0": "declared sample rules met; no authority granted",
+      "1": "negative or insufficient evidence",
+      "2": "invalid or error report"
+    },
+    "authenticity_verified": false
   }
 }

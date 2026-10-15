@@ -2,3 +2,6 @@ include README.md llms.txt showcase.json AGENTS.md
 recursive-include docs *.md *.json
 recursive-include resqmonitor/fixtures *.csv *.json
 recursive-include tests *.py
+recursive-include scripts *.py
+recursive-include examples *.json *.txt *.html
+recursive-include .github/workflows *.yml

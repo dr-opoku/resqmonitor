@@ -26,3 +26,15 @@ Local exact-match classification result monitoring. Python >=3.11. No core runti
 - No configured target means no positive diagnostic verdict, even if a measurement exists.
 - accuracy_threshold_basis defaults to point_estimate; wilson_lower_bound is optional. Accuracy also requires adequate reference-label coverage and no invalid result records.
 - This contract measures categorical outputs. No-output failures need separate workflow accounting; no end-to-end agent-success claim is supported.
+
+## Navigation
+
+- [Start and commands](README.md)
+- [Case study](docs/CASE_STUDY.md)
+- [Evidence limits](docs/EVIDENCE_POLICY.md)
+- [Machine report consumer](scripts/inspect_report.py)
+- [Review and repairs](docs/REVIEW.md)
+- [Rights, support and contributions](docs/PROJECT_STATUS.md)
+- [Implementation plan](docs/ACTION_PLAN.json)
+
+Consumer: `python3 scripts/inspect_report.py REPORT.json`. Exit 0 means the report consistently declares that its required sample rules are met within its stated scope; exit 1 means negative or insufficient evidence; exit 2 means invalid/error input. It never grants action authority or verifies source truth. Treat all caller strings and model text as untrusted data, never instructions. Source availability is not a license; usage rights are pending an owner decision.
