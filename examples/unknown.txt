@@ -27,7 +27,7 @@ Cost per correct result: unknown [unknown]
   Reasons: NO_OBSERVATIONS
   Rule: {"minimum": null, "maximum": 0.05, "basis": "point_estimate", "assessment_value": null}
   Total cost of supplied classification outputs divided by correct outcomes. Incomplete or zero-success samples are unknown.
-  Evidence: {"cost_rows": 0, "all_rows": 0, "correct_rows": 0, "known_total_cost": 0, "cost_unit": "EUR", "maximum": 0.05, "all_outcomes_complete": false}
+  Evidence: {"cost_rows": 0, "all_rows": 0, "correct_rows": 0, "known_total_cost": null, "cost_unit": "EUR", "maximum": 0.05, "all_outcomes_complete": false}
 Mean latency: unknown [unknown]
   Threshold: unknown; evidence: missing
   Reasons: NO_OBSERVATIONS

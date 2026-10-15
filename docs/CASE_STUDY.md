@@ -38,6 +38,8 @@ The following confusion counts are calculated directly from the fixtures and reg
 | account → account | 12 | 8 |
 | account → billing | 1 | 5 |
 
+The three omitted pairings (`billing → account`, `refund → billing`, `account → refund`) each have zero observations in both cohorts. The complete nine cells sum to 40 per cohort.
+
 A refund routed to account support may delay reimbursement; a billing ticket routed to refunds may create different rework. A service owner should assign priorities and review consequential errors separately. No loss matrix or financial impact is supplied, so no asymmetric-loss calculation or savings claim follows.
 
 The degraded `business` group has 6/20 correct, while `consumer` has 20/20. Each group is below the 30-row evidence minimum and is descriptive only. Unchanged group proportions do not establish comparable difficulty or a causal model regression.

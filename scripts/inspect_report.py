@@ -34,7 +34,7 @@ def inspect_report(report):
     required = decision.get("required_checks")
     require(isinstance(required, list) and required and all(isinstance(x, str) for x in required)
             and len(set(required)) == len(required), "Missing or invalid required checks")
-    core = {"completeness", "freshness", "availability", "consistency"} if TOOL == "dataqmonitor" else {"accuracy", "outcome_coverage"}
+    core = {"accuracy", "outcome_coverage"}
     require(core <= set(required), "Core checks are absent from required scope")
     checks = report.get("checks")
     require(isinstance(checks, dict) and set(required) <= set(checks), "Required check is missing")

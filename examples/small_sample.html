@@ -12,7 +12,7 @@ summary{cursor:pointer;text-decoration:underline}footer{margin-top:24px;color:#4
 </style></head><body><main><header><h1>resqmonitor — Synthetic ticket classification</h1>
 <p>Overall status: <strong>UNKNOWN</strong> · 2026-10-13T12:00:00+00:00</p>
 <p>undetermined for supplied observations. No action authorized.</p>
-<p class="demo">Synthetic demonstration · fixed reference time</p><p>{&quot;rows&quot;: 1, &quot;evaluated_rows&quot;: 1, &quot;correct_rows&quot;: 1, &quot;pending_rows&quot;: 0, &quot;invalid_rows&quot;: 0, &quot;duplicate_id_rows&quot;: 0, &quot;accuracy_pct&quot;: 100.0, &quot;outcome_coverage_pct&quot;: 100.0, &quot;accuracy_wilson_95_pct&quot;: [20.654931437723747, 100]}</p></header><div class="grid"><article><h2>Observed accuracy</h2><p class="value">100.00 %</p><p class="badge unknown">UNKNOWN</p><p>Threshold: <strong>ok</strong> · Evidence: <strong>insufficient</strong></p><p>BELOW_MIN_SAMPLE</p><p>Exact label matches among supplied reference outcomes. Count, outcome coverage and valid records govern the verdict.</p><p>Rule: {&quot;minimum&quot;: 85, &quot;maximum&quot;: null, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 100.0}</p><details><summary>Calculation evidence</summary><pre>{
+<p class="demo">Synthetic demonstration · fixed reference time</p><p>{&quot;rows&quot;: 1, &quot;evaluated_rows&quot;: 1, &quot;correct_rows&quot;: 1, &quot;pending_rows&quot;: 0, &quot;invalid_rows&quot;: 0, &quot;duplicate_id_rows&quot;: 0, &quot;accuracy_pct&quot;: 100.0, &quot;outcome_coverage_pct&quot;: 100.0, &quot;accuracy_wilson_95_pct&quot;: [20.654931437723747, 100]}</p></header><div class="grid"><article><h2>Observed accuracy</h2><p class="value">100.0 %</p><p class="badge unknown">UNKNOWN</p><p>Threshold: <strong>ok</strong> · Evidence: <strong>insufficient</strong></p><p>BELOW_MIN_SAMPLE</p><p>Exact label matches among supplied reference outcomes. Count, outcome coverage and valid records govern the verdict.</p><p>Rule: {&quot;minimum&quot;: 85, &quot;maximum&quot;: null, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 100.0}</p><details><summary>Calculation evidence</summary><pre>{
   &quot;correct_rows&quot;: 1,
   &quot;evaluated_rows&quot;: 1,
   &quot;minimum_evaluated_rows&quot;: 30,
@@ -24,13 +24,13 @@ summary{cursor:pointer;text-decoration:underline}footer{margin-top:24px;color:#4
   &quot;minimum_outcome_coverage_pct&quot;: 90,
   &quot;interval_assumptions&quot;: &quot;independent_binomial_sample_not_verified&quot;,
   &quot;minimum_accuracy_pct&quot;: 85
-}</pre></details></article><article><h2>Outcome coverage</h2><p class="value">100.00 %</p><p class="badge ok">OK</p><p>Threshold: <strong>ok</strong> · Evidence: <strong>sufficient</strong></p><p>No evidence issues under the declared policy</p><p>Valid completed outcomes divided by all supplied rows, including pending and invalid rows.</p><p>Rule: {&quot;minimum&quot;: 90, &quot;maximum&quot;: null, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 100.0}</p><details><summary>Calculation evidence</summary><pre>{
+}</pre></details></article><article><h2>Outcome coverage</h2><p class="value">100.0 %</p><p class="badge ok">OK</p><p>Threshold: <strong>ok</strong> · Evidence: <strong>sufficient</strong></p><p>No evidence issues under the declared policy</p><p>Valid completed outcomes divided by all supplied rows, including pending and invalid rows.</p><p>Rule: {&quot;minimum&quot;: 90, &quot;maximum&quot;: null, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 100.0}</p><details><summary>Calculation evidence</summary><pre>{
   &quot;evaluated_rows&quot;: 1,
   &quot;all_rows&quot;: 1,
   &quot;pending_rows&quot;: 0,
   &quot;invalid_rows&quot;: 0,
   &quot;minimum_pct&quot;: 90
-}</pre></details></article><article><h2>Confidence alignment</h2><p class="value">8.00 pp</p><p class="badge unknown">UNKNOWN</p><p>Threshold: <strong>ok</strong> · Evidence: <strong>insufficient</strong></p><p>BELOW_MIN_SAMPLE</p><p>Absolute gap between mean reported confidence and accuracy on paired rows; this is a warning heuristic.</p><p>Rule: {&quot;minimum&quot;: null, &quot;maximum&quot;: 10, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 8.0}</p><details><summary>Calculation evidence</summary><pre>{
+}</pre></details></article><article><h2>Confidence alignment</h2><p class="value">8.0 pp</p><p class="badge unknown">UNKNOWN</p><p>Threshold: <strong>ok</strong> · Evidence: <strong>insufficient</strong></p><p>BELOW_MIN_SAMPLE</p><p>Absolute gap between mean reported confidence and accuracy on paired rows; this is a warning heuristic.</p><p>Rule: {&quot;minimum&quot;: null, &quot;maximum&quot;: 10, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 8.0}</p><details><summary>Calculation evidence</summary><pre>{
   &quot;paired_rows&quot;: 1,
   &quot;mean_confidence_pct&quot;: 92.0,
   &quot;paired_accuracy_pct&quot;: 100.0,
@@ -44,18 +44,18 @@ summary{cursor:pointer;text-decoration:underline}footer{margin-top:24px;color:#4
   &quot;cost_unit&quot;: &quot;EUR&quot;,
   &quot;maximum&quot;: 0.05,
   &quot;all_outcomes_complete&quot;: true
-}</pre></details></article><article><h2>Mean latency</h2><p class="value">170.00 ms</p><p class="badge ok">OK</p><p>Threshold: <strong>ok</strong> · Evidence: <strong>sufficient</strong></p><p>No evidence issues under the declared policy</p><p>Mean and nearest-rank p95 over instrumented rows; incomplete latency coverage keeps the verdict unknown.</p><p>Rule: {&quot;minimum&quot;: null, &quot;maximum&quot;: 300, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 170.0}</p><details><summary>Calculation evidence</summary><pre>{
+}</pre></details></article><article><h2>Mean latency</h2><p class="value">170.0 ms</p><p class="badge ok">OK</p><p>Threshold: <strong>ok</strong> · Evidence: <strong>sufficient</strong></p><p>No evidence issues under the declared policy</p><p>Mean and nearest-rank p95 over instrumented rows; incomplete latency coverage keeps the verdict unknown.</p><p>Rule: {&quot;minimum&quot;: null, &quot;maximum&quot;: 300, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 170.0}</p><details><summary>Calculation evidence</summary><pre>{
   &quot;latency_rows&quot;: 1,
   &quot;all_rows&quot;: 1,
   &quot;p95_ms&quot;: 170.0,
   &quot;maximum_mean_ms&quot;: 300
-}</pre></details></article><article><h2>Accuracy change from baseline</h2><p class="value">10.00 pp</p><p class="badge unknown">UNKNOWN</p><p>Threshold: <strong>ok</strong> · Evidence: <strong>insufficient</strong></p><p>COMPARISON_GUARDRAILS_NOT_MET</p><p>Current minus baseline accuracy. Samples and outcome coverage must meet their minimums; this is descriptive, not causal.</p><p>Rule: {&quot;minimum&quot;: -10, &quot;maximum&quot;: null, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 10.0}</p><details><summary>Calculation evidence</summary><pre>{
+}</pre></details></article><article><h2>Accuracy change from baseline</h2><p class="value">10.0 pp</p><p class="badge unknown">UNKNOWN</p><p>Threshold: <strong>ok</strong> · Evidence: <strong>insufficient</strong></p><p>COMPARISON_GUARDRAILS_NOT_MET</p><p>Current minus baseline accuracy. Samples and outcome coverage must meet their minimums; this is descriptive, not causal.</p><p>Rule: {&quot;minimum&quot;: -10, &quot;maximum&quot;: null, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 10.0}</p><details><summary>Calculation evidence</summary><pre>{
   &quot;current_accuracy_pct&quot;: 100.0,
   &quot;baseline_accuracy_pct&quot;: 90.0,
   &quot;current_evaluated_rows&quot;: 1,
   &quot;baseline_evaluated_rows&quot;: 40,
   &quot;allowed_drop_pp&quot;: 10
-}</pre></details></article><article><h2>Case mix shift</h2><p class="value">50.00 %</p><p class="badge unknown">UNKNOWN</p><p>Threshold: <strong>attention</strong> · Evidence: <strong>insufficient</strong></p><p>COMPARISON_GUARDRAILS_NOT_MET, THRESHOLD_NOT_MET</p><p>Total variation in supplied group shares. Changed case mix may affect accuracy comparisons.</p><p>Rule: {&quot;minimum&quot;: null, &quot;maximum&quot;: 20, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 50.0}</p><details><summary>Calculation evidence</summary><pre>{
+}</pre></details></article><article><h2>Case mix shift</h2><p class="value">50.0 %</p><p class="badge unknown">UNKNOWN</p><p>Threshold: <strong>attention</strong> · Evidence: <strong>insufficient</strong></p><p>COMPARISON_GUARDRAILS_NOT_MET, THRESHOLD_NOT_MET</p><p>Total variation in supplied group shares. Changed case mix may affect accuracy comparisons.</p><p>Rule: {&quot;minimum&quot;: null, &quot;maximum&quot;: 20, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 50.0}</p><details><summary>Calculation evidence</summary><pre>{
   &quot;current_groups&quot;: {
     &quot;observed&quot;: true,
     &quot;missing_group_rows&quot;: 0,

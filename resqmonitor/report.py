@@ -22,7 +22,7 @@ def as_text(report: dict[str, Any]) -> str:
     lines.append("Sample: " + json.dumps(report["summary"], ensure_ascii=False, allow_nan=False))
     lines.append("")
     for item in report["checks"].values():
-        value = "unknown" if item["value"] is None else f"{item['value']:.2f} {item['unit']}"
+        value = "unknown" if item["value"] is None else f"{item['value']} {item['unit']}"
         lines.append(f"{item['label']}: {value} [{item['status']}]")
         lines.append(f"  Threshold: {item['threshold_status']}; evidence: {item['evidence_status']}")
         lines.append("  Reasons: " + (", ".join(item["reason_codes"]) or "None under the declared policy"))
@@ -43,7 +43,7 @@ def as_html(report: dict[str, Any]) -> str:
     escape = lambda value: html.escape(str(value), quote=True)
     cards = []
     for item in report["checks"].values():
-        value = "Unknown" if item["value"] is None else f"{item['value']:.2f} {item['unit']}"
+        value = "Unknown" if item["value"] is None else f"{item['value']} {item['unit']}"
         evidence = escape(json.dumps(item["evidence"], indent=2, ensure_ascii=False, allow_nan=False))
         cards.append(
             f'<article><h2>{escape(item["label"])}</h2>'

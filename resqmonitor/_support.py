@@ -65,7 +65,10 @@ def json_object(text: str) -> dict[str, Any]:
             result[key] = value
         return result
 
-    value = json.loads(text, parse_constant=reject_constant, object_pairs_hook=unique_keys)
+    try:
+        value = json.loads(text, parse_constant=reject_constant, object_pairs_hook=unique_keys)
+    except RecursionError as exc:
+        raise ValueError("Configuration nesting exceeds the JSON decoder limit.") from exc
     if not isinstance(value, dict):
         raise ValueError("Configuration must be a JSON object.")
     return value

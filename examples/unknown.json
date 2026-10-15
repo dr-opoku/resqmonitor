@@ -155,7 +155,7 @@
         "cost_rows": 0,
         "all_rows": 0,
         "correct_rows": 0,
-        "known_total_cost": 0,
+        "known_total_cost": null,
         "cost_unit": "EUR",
         "maximum": 0.05,
         "all_outcomes_complete": false

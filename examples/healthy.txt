@@ -4,43 +4,43 @@ Decision: criteria_met for supplied observations; no action authorized.
 SYNTHETIC DEMO: fixed reference time; no real customer data.
 Sample: {"rows": 40, "evaluated_rows": 40, "correct_rows": 38, "pending_rows": 0, "invalid_rows": 0, "duplicate_id_rows": 0, "accuracy_pct": 95.0, "outcome_coverage_pct": 100.0, "accuracy_wilson_95_pct": [83.49612263085902, 98.61793326138516]}
 
-Observed accuracy: 95.00 % [ok]
+Observed accuracy: 95.0 % [ok]
   Threshold: ok; evidence: sufficient
   Reasons: None under the declared policy
   Rule: {"minimum": 85, "maximum": null, "basis": "point_estimate", "assessment_value": 95.0}
   Exact label matches among supplied reference outcomes. Count, outcome coverage and valid records govern the verdict.
   Evidence: {"correct_rows": 38, "evaluated_rows": 40, "minimum_evaluated_rows": 30, "wilson_95_interval_pct": [83.49612263085902, 98.61793326138516], "outcome_coverage_pct": 100.0, "minimum_outcome_coverage_pct": 90, "interval_assumptions": "independent_binomial_sample_not_verified", "minimum_accuracy_pct": 85}
-Outcome coverage: 100.00 % [ok]
+Outcome coverage: 100.0 % [ok]
   Threshold: ok; evidence: sufficient
   Reasons: None under the declared policy
   Rule: {"minimum": 90, "maximum": null, "basis": "point_estimate", "assessment_value": 100.0}
   Valid completed outcomes divided by all supplied rows, including pending and invalid rows.
   Evidence: {"evaluated_rows": 40, "all_rows": 40, "pending_rows": 0, "invalid_rows": 0, "minimum_pct": 90}
-Confidence alignment: 3.00 pp [ok]
+Confidence alignment: 3.0 pp [ok]
   Threshold: ok; evidence: sufficient
   Reasons: None under the declared policy
   Rule: {"minimum": null, "maximum": 10, "basis": "point_estimate", "assessment_value": 3.0}
   Absolute gap between mean reported confidence and accuracy on paired rows; this is a warning heuristic.
   Evidence: {"paired_rows": 40, "mean_confidence_pct": 92.0, "paired_accuracy_pct": 95.0, "maximum_gap_pp": 10, "minimum_paired_rows": 30}
-Cost per correct result: 0.02 EUR [ok]
+Cost per correct result: 0.021053 EUR [ok]
   Threshold: ok; evidence: sufficient
   Reasons: None under the declared policy
   Rule: {"minimum": null, "maximum": 0.05, "basis": "point_estimate", "assessment_value": 0.021053}
   Total cost of supplied classification outputs divided by correct outcomes. Incomplete or zero-success samples are unknown.
   Evidence: {"cost_rows": 40, "all_rows": 40, "correct_rows": 38, "known_total_cost": 0.8, "cost_unit": "EUR", "maximum": 0.05, "all_outcomes_complete": true}
-Mean latency: 190.00 ms [ok]
+Mean latency: 190.0 ms [ok]
   Threshold: ok; evidence: sufficient
   Reasons: None under the declared policy
   Rule: {"minimum": null, "maximum": 300, "basis": "point_estimate", "assessment_value": 190.0}
   Mean and nearest-rank p95 over instrumented rows; incomplete latency coverage keeps the verdict unknown.
   Evidence: {"latency_rows": 40, "all_rows": 40, "p95_ms": 210.0, "maximum_mean_ms": 300}
-Accuracy change from baseline: 5.00 pp [ok]
+Accuracy change from baseline: 5.0 pp [ok]
   Threshold: ok; evidence: sufficient
   Reasons: None under the declared policy
   Rule: {"minimum": -10, "maximum": null, "basis": "point_estimate", "assessment_value": 5.0}
   Current minus baseline accuracy. Samples and outcome coverage must meet their minimums; this is descriptive, not causal.
   Evidence: {"current_accuracy_pct": 95.0, "baseline_accuracy_pct": 90.0, "current_evaluated_rows": 40, "baseline_evaluated_rows": 40, "allowed_drop_pp": 10}
-Case mix shift: 0.00 % [ok]
+Case mix shift: 0.0 % [ok]
   Threshold: ok; evidence: sufficient
   Reasons: None under the declared policy
   Rule: {"minimum": null, "maximum": 20, "basis": "point_estimate", "assessment_value": 0.0}

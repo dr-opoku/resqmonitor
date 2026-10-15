@@ -6,7 +6,7 @@ A small, local monitor for categorical predictions and supplied outcome labels. 
 
 ## Try it in one command
 
-Requires Python **3.11 or newer**. From this repository directory:
+Requires Python **3.11 or newer**. Verified on Linux; the installation commands below use POSIX paths. Windows behavior has not been verified. From this repository directory:
 
 ```bash
 python3 -m resqmonitor demo

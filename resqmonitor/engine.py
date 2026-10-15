@@ -251,10 +251,10 @@ def analyze(csv_text: str, config: dict[str, Any] | None = None, *,
         raise ValueError("Cost per correct result exceeds the finite numeric range.")
     # Python's built-in float sum changed in 3.12; use a stable accumulator.
     try:
-        known_cost = math.fsum(cost.values()) if cost else 0
+        known_cost = math.fsum(cost.values()) if cost else None
     except OverflowError:
         known_cost = None
-    cost_issues = ([] if total else ["NO_OBSERVATIONS"])
+    cost_issues = ([] if cost else ["NO_OBSERVATIONS"])
     if total and len(cost) != total:
         cost_issues.append("INCOMPLETE_MEASUREMENTS")
     if total and evaluated != total:

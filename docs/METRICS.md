@@ -21,7 +21,7 @@ This aggregate warning is **not a calibration assessment**: opposing errors can 
 
 Total cost of **all supplied classification-output rows**, including incorrect predictions, divided by correct evaluated results. It requires valid cost for every row, all outcomes completed and valid, the minimum evaluated count, and at least one correct result. Otherwise its value/verdict is unknown; known cost and coverage remain visible as evidence. No successes cannot yield a zero cost per success.
 
-Costs of omitted retries, infrastructure, review work, and failures are not inferred. Use an upstream accounting definition that captures costs attributable to the output cohort. No-output failures cannot be valid records here; assess full workflow economics separately. With no configured cost target, a computable value remains visible but its verdict is unknown. All cost values use the declared unit. Very large inputs that make the result unrepresentable produce an input error; an unrepresentable known total is null.
+Costs of omitted retries, infrastructure, review work, and failures are not inferred. Use an upstream accounting definition that captures costs attributable to the output cohort. No-output failures cannot be valid records here; assess full workflow economics separately. With no configured cost target, a computable value remains visible but its verdict is unknown. All cost values use the declared unit. Very large inputs that make the result unrepresentable produce an input error; an unrepresentable known total is null. `known_total_cost` sums valid cost observations only and is also null when there are none, including an empty extract. A measured zero remains zero. Partial known totals do not establish complete costs; `cost_rows` and `all_rows` expose coverage. With no valid cost observations, evidence is `missing` and includes `NO_OBSERVATIONS`.
 
 ## Latency
 
@@ -51,3 +51,7 @@ Always includes accuracy and outcome coverage. Also includes:
 Any finding or included attention verdict yields overall attention. Otherwise any included unknown yields unknown; all included ok yields ok. The report's scope note lists these included checks. Missing optional diagnostics remain visible without silently asserting their adequacy. Invalid measurements in present optional columns create findings even without a target.
 
 See [evidence policy](EVIDENCE_POLICY.md) for separate threshold/evidence/verdict semantics and cross-domain examples. Numeric comparisons use unrounded values; report check values are rounded to six decimal places.
+
+## Display precision
+
+Text and HTML retain the check value recorded in JSON (rounded to six decimal places), without further two-decimal rounding. Threshold comparisons use the unrounded measurement; very near a threshold the displayed value can still coincide with the limit. Inspect threshold status and reason codes rather than inferring the verdict from presentation alone.

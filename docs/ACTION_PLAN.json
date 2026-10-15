@@ -70,6 +70,12 @@
       "action": "Repair the Python 3.11/3.12 floating-point aggregate discrepancy exposed by the first GitHub example replay; use explicit stable accumulation.",
       "acceptance": "A focused regression fails before the repair. Stored examples reproduce under both locally available versions; original responses, frozen policy and sample verdicts remain unchanged.",
       "status": "implemented_and_locally_verified"
+    },
+    {
+      "id": "second_review_closure",
+      "action": "Resolve verified AGY/Claude findings in the adjudication table, add focused regressions, regenerate affected synthetic reports and verify core, optional MCP and packaging.",
+      "acceptance": "No missing-cost-as-zero evidence, no extra human-output rounding, bounded decoder input errors, accurate fictional chronology and recorded rejected suggestions. Keep all rights unchanged.",
+      "status": "implemented_and_locally_verified"
     }
   ],
   "pre_edit_gate": "Record baseline tests and one independent Gemini 3.8 Flash review of this plan and supplied source before repository edits. Revise actions against concrete findings.",
@@ -117,5 +123,96 @@
       "AGY was requested with selector gemini-3.8-flash-high; no independent attestation of the backend model."
     ]
   },
-  "verification": "docs/VERIFICATION.json"
+  "verification": "docs/VERIFICATION.json",
+  "followup_stress_test": {
+    "date": "2026-10-15T09:06:04.055004+00:00",
+    "baseline_commit": "85d8a06514b11d07619fc6b7742a95aee569536e",
+    "pre_edit_gate": "passed",
+    "tracked_files_unchanged_at_gate": true,
+    "reviews": {
+      "agy": {
+        "exit_code": 0,
+        "requested_model": "gemini-3.8-flash-high",
+        "started_at": "2026-10-15T08:57:51.699785+00:00",
+        "finished_at": "2026-10-15T09:02:17.396257+00:00",
+        "repository_unchanged": true,
+        "scope": "Read-only static source/plan review; test source and saved example reports omitted; no execution or independent backend attestation."
+      },
+      "claude": {
+        "exit_code": 0,
+        "requested_model": "claude-sonnet-5-5",
+        "provider_interface": "claude",
+        "started_at": "2026-10-15T08:57:10.678259+00:00",
+        "finished_at": "2026-10-15T08:58:12.742675+00:00",
+        "repository_unchanged": true,
+        "filesystem_protection": "All showcase directories mounted read-only.",
+        "scope": "Static supplied-source review; model tools disabled by request and Claude tool set empty; no independent backend attestation."
+      }
+    },
+    "adjudication": [
+      {
+        "id": "C1",
+        "finding": "Low: tiny costs lose precision in text/HTML.",
+        "disposition": "Accepted",
+        "reason": "Reproduced 0.021053 displayed as 0.02, and 0.0504 above a 0.05 maximum displayed as 0.05. Preserve the serialized value; keep unrounded comparisons.",
+        "verification": "tests/test_review_regressions.py"
+      },
+      {
+        "id": "C2 / G1",
+        "finding": "Low / medium: missing cost observations reported as known zero.",
+        "disposition": "Accepted",
+        "reason": "Reproduced absent column, missing cell and empty cohort. Emit null when no valid cost exists; retain measured zero. No observations yields missing evidence; partial totals remain partial.",
+        "verification": "tests/test_review_regressions.py"
+      },
+      {
+        "id": "C3",
+        "finding": "Low: deeply nested config may raise an unhandled RecursionError.",
+        "disposition": "Accepted after local reproduction",
+        "reason": "100,000 nested levels reproduced before edits; rethrow decoder RecursionError as ValueError so CLI returns structured exit 2.",
+        "verification": "tests/test_review_regressions.py"
+      },
+      {
+        "id": "C4",
+        "finding": "Low: review findings lack individual adjudication.",
+        "disposition": "Accepted / bounded",
+        "reason": "Append individual decisions for this round; keep prior record intact rather than rewriting historical decisions.",
+        "verification": "docs/REVIEW.md"
+      },
+      {
+        "id": "C5 / G2",
+        "finding": "Info / low: constant consumer branch for sibling tool.",
+        "disposition": "Accepted",
+        "reason": "Remove unreachable branch; retain only accuracy and outcome_coverage as mandatory core.",
+        "verification": "tests/test_stress.py"
+      },
+      {
+        "id": "G3",
+        "finding": "Low: omitted confusion cells not explicitly zero.",
+        "disposition": "Accepted",
+        "reason": "Name the three omitted pairings as zero in both cohorts. Existing fixture-count tests verify complete nonzero cells and sums of 40.",
+        "verification": "tests/test_case_study.py"
+      },
+      {
+        "id": "G4",
+        "finding": "Low: fixture alias protection may not support direct zip import.",
+        "disposition": "Bounded; no feature added",
+        "reason": "Support checkout and normal pip-installed wheel files, both exercised. Direct execution inside a zip archive is not a supported distribution path; no demonstrated overwrite on supported paths.",
+        "verification": "Packaging verification; resqmonitor/__main__.py"
+      },
+      {
+        "id": "G5",
+        "finding": "Low: evidence precedence absent from generated schema descriptions.",
+        "disposition": "Bounded; no schema edit",
+        "reason": "EVIDENCE_POLICY already documents precedence; schema enums define possible values. Keep generated MCP/JSON schema equality rather than hand-editing a generated copy.",
+        "verification": "docs/EVIDENCE_POLICY.md; tests/test_mcp.py"
+      }
+    ],
+    "limits": [
+      "Two static source/plan reviews, not independently executed tests.",
+      "AGY packet omitted tests and saved example JSON; Claude packet included test source, not test execution.",
+      "Requested model selectors are recorded; backend identity is not independently attested.",
+      "An initial AGY invocation failed before model execution; corrected invocation completed. No truncated final response in this round.",
+      "Targeted reproductions and verification were performed separately by the implementing agent."
+    ]
+  }
 }
