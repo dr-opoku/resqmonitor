@@ -249,7 +249,11 @@ def analyze(csv_text: str, config: dict[str, Any] | None = None, *,
         raise ValueError("Cost per correct result exceeds the finite numeric range.") from exc
     if cost_per_correct is not None and not math.isfinite(cost_per_correct):
         raise ValueError("Cost per correct result exceeds the finite numeric range.")
-    known_cost = sum(cost.values())
+    # Python's built-in float sum changed in 3.12; use a stable accumulator.
+    try:
+        known_cost = math.fsum(cost.values()) if cost else 0
+    except OverflowError:
+        known_cost = None
     cost_issues = ([] if total else ["NO_OBSERVATIONS"])
     if total and len(cost) != total:
         cost_issues.append("INCOMPLETE_MEASUREMENTS")
@@ -262,7 +266,7 @@ def analyze(csv_text: str, config: dict[str, Any] | None = None, *,
     checks["cost_per_correct"] = check(
         "Cost per correct result", cost_per_correct, cfg["cost_unit"],
         {"cost_rows": len(cost), "all_rows": total, "correct_rows": correct,
-         "known_total_cost": known_cost if math.isfinite(known_cost) else None,
+         "known_total_cost": known_cost,
          "cost_unit": cfg["cost_unit"], "maximum": cfg["max_cost_per_correct"],
          "all_outcomes_complete": evaluated == total and total > 0},
         "Total cost of supplied classification outputs divided by correct outcomes. Incomplete or zero-success samples are unknown.",
@@ -323,8 +327,8 @@ def analyze(csv_text: str, config: dict[str, Any] | None = None, *,
         current_mix = {item["group"]: item["rows"] / total for item in groups["groups"]}
         baseline_mix = {item["group"]: item["rows"] / baseline_summary["rows"]
                         for item in baseline_groups["groups"]}
-        shift = 50 * sum(abs(current_mix.get(group, 0) - baseline_mix.get(group, 0))
-                         for group in set(current_mix) | set(baseline_mix))
+        shift = 50 * math.fsum(abs(current_mix.get(group, 0) - baseline_mix.get(group, 0))
+                              for group in sorted(set(current_mix) | set(baseline_mix)))
     checks["case_mix"] = check(
         "Case mix shift", shift, "%",
         {"current_groups": groups, "baseline_groups": baseline_groups,

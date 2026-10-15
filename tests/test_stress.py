@@ -19,6 +19,10 @@ spec.loader.exec_module(consumer)
 
 
 class StressTests(unittest.TestCase):
+    def test_fractional_cost_total_is_reproducible(self):
+        self.assertEqual(demo("healthy")["checks"]["cost_per_correct"]["evidence"]["known_total_cost"], 0.8)
+        self.assertEqual(demo("degraded")["checks"]["cost_per_correct"]["evidence"]["known_total_cost"], 2.0)
+
     def test_output_aliases_never_change_inputs(self):
         for source_key in ("csv", "config", "baseline"):
             for alias in ("same", "symlink", "hardlink"):
