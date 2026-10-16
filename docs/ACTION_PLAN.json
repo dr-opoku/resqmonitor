@@ -1,0 +1,218 @@
+{
+  "schema_version": "1.0",
+  "repository": "resqmonitor",
+  "baseline_commit": "68e547ff04b30dd405bd26b8b9e99e6f5af395dc",
+  "date": "2026-10-15",
+  "state": "implemented_and_locally_verified",
+  "goal": "A small, honest, easy-to-inspect professional reference for coordinating evidence-based AI and organizational work, without disclosing private platform IP.",
+  "profile_context": "The owner seeks cross-corporate project/program and transformation assignments including AI. These repositories can demonstrate concrete technical judgment and evidence discipline, not establish unverified CV achievements.",
+  "actions": [
+    {
+      "id": "case",
+      "action": "Explain the existing healthy/degraded/baseline synthetic ticket classifier with saved reports, explicit constructed-label provenance and fictional time/cohort, confusion counts and different business consequences of false routing; show allocation of costs and missing workflow scope.",
+      "acceptance": "Never call authored labels independently adjudicated. Distinguish point accuracy, Wilson-bound rule, incomplete labels, confidence heuristic, subgroup size and non-causal baseline. Hand-calculated expectations are regression tested.",
+      "status": "implemented_and_locally_verified"
+    },
+    {
+      "id": "regressions",
+      "action": "Stress all duplicate-ID occurrences, pending labels, partial costs/latency, tiny subgroup, threshold basis, HTML escaping, malformed input and output/input path collisions; fix demonstrated defects.",
+      "acceptance": "No missing outcomes/costs disappear from relevant denominators; negative checks remain visible alongside insufficient evidence; no input overwrite.",
+      "status": "implemented_and_locally_verified"
+    },
+    {
+      "id": "entry",
+      "action": "Put one safe offline command and a concise expected result near the top; link a readable saved report and a reproducible case study.",
+      "acceptance": "A reader can understand purpose, run command, expected verdict and limits in the first screen.",
+      "status": "implemented_and_locally_verified"
+    },
+    {
+      "id": "consumer",
+      "action": "Add a runnable standard-library JSON report consumer with fail-closed structural checks, distinct error/negative/unknown/sample-met outcomes, tests and an explicit no-action-authority output.",
+      "acceptance": "Exit 0 only for structurally consistent declared sample eligibility, exit 1 for negative/unknown, exit 2 for invalid/error reports. No exit status grants action authority; no source authenticity or underlying-data recomputation is performed.",
+      "status": "implemented_and_locally_verified"
+    },
+    {
+      "id": "navigation",
+      "action": "Use Markdown links in llms.txt, consistent license-pending wording and a prominent modest cross-reference to all three independent showcases; maintain AGENTS.md and project-local showcase.json.",
+      "acceptance": "No invented interoperability standard, purchase permission, software integration or production claim.",
+      "status": "implemented_and_locally_verified"
+    },
+    {
+      "id": "verification",
+      "action": "Add offline CI for Python 3.11 and 3.13, tests for core/CLI/consumer and deterministic example reproduction. Keep optional MCP tests separate and visible.",
+      "acceptance": "No model or credentials required in default CI; read-only token permissions; local test counts and skipped tests reported honestly.",
+      "status": "implemented_and_locally_verified"
+    },
+    {
+      "id": "professional",
+      "action": "Describe the demonstrated work: requirements, explicit decision rules, evidence boundaries, implementation and responsible next steps. Add short support/contribution/security guidance and maintenance scope.",
+      "acceptance": "No unverified CV achievements, customer outcomes, enterprise readiness or commercial demand claims.",
+      "status": "implemented_and_locally_verified"
+    },
+    {
+      "id": "rights",
+      "action": "Keep license unselected; document the owner decisions needed for noncommercial/research/procurement use and future commercial terms. Do not create a LICENSE, checkout, release, price or visibility change.",
+      "acceptance": "No implicit free-use or redistribution grant and no claim that source availability is open source.",
+      "status": "documented_owner_decision_pending"
+    },
+    {
+      "id": "reviewed_repairs",
+      "action": [
+        "Protect input/config/baseline files from output collisions, including symbolic and hard links.",
+        "Describe confusion counts as external case analysis; core measures exact categorical label agreement, not asymmetric financial loss.",
+        "Provide defensive consumer, authored-label provenance, cost scope and reproducible case."
+      ],
+      "acceptance": "Regression tests reproduce the original defects and exercise the repaired behavior; all input files remain byte-identical after refused collisions.",
+      "status": "implemented_and_locally_verified"
+    },
+    {
+      "id": "ci_numeric_reproducibility",
+      "action": "Repair the Python 3.11/3.12 floating-point aggregate discrepancy exposed by the first GitHub example replay; use explicit stable accumulation.",
+      "acceptance": "A focused regression fails before the repair. Stored examples reproduce under both locally available versions; original responses, frozen policy and sample verdicts remain unchanged.",
+      "status": "implemented_and_locally_verified"
+    },
+    {
+      "id": "second_review_closure",
+      "action": "Resolve verified AGY/Claude findings in the adjudication table, add focused regressions, regenerate affected synthetic reports and verify core, optional MCP and packaging.",
+      "acceptance": "No missing-cost-as-zero evidence, no extra human-output rounding, bounded decoder input errors, accurate fictional chronology and recorded rejected suggestions. Keep all rights unchanged.",
+      "status": "implemented_and_locally_verified"
+    }
+  ],
+  "pre_edit_gate": "Record baseline tests and one independent Gemini 3.8 Flash review of this plan and supplied source before repository edits. Revise actions against concrete findings.",
+  "publication_gate": [
+    "Owner-selected license and contribution rights",
+    "Owner-approved visibility and release",
+    "Separate evidence for any real customer, commercial or production claim"
+  ],
+  "reference_sources": [
+    "https://github.com/promptfoo/promptfoo",
+    "https://github.com/evidentlyai/evidently",
+    "https://github.com/steipete/oracle",
+    "https://agents.md/"
+  ],
+  "reference_interpretation": "Adopt visible examples, short reproducible entry points, tests and explicit agent guidance. These sources do not prove why users award stars or validate this owner's competence.",
+  "stress_test_decision": {
+    "repository": "resqmonitor",
+    "decided_at": "2026-10-15T06:35:13.132444+00:00",
+    "pre_edit_gate": "passed",
+    "repository_unchanged_at_gate": true,
+    "baseline_commit": "68e547ff04b30dd405bd26b8b9e99e6f5af395dc",
+    "review": {
+      "requested_model": "gemini-3.8-flash-high",
+      "started_at": "2026-10-15T06:27:07.552736+00:00",
+      "finished_at": "2026-10-15T06:31:06.068036+00:00",
+      "exit_code": 0,
+      "repository_files_unchanged": true,
+      "filesystem_protection": "All three repository directories mounted read-only for reviewer process.",
+      "review_scope": "One plan/source-packet review, not execution or independent source authentication."
+    },
+    "accepted": [
+      "Protect input/config/baseline files from output collisions, including symbolic and hard links.",
+      "Describe confusion counts as external case analysis; core measures exact categorical label agreement, not asymmetric financial loss.",
+      "Provide defensive consumer, authored-label provenance, cost scope and reproducible case."
+    ],
+    "rejected_or_bounded": [
+      "No naming ban on llm-eval; clarify the scope of the naming instruction.",
+      "No reason-code deduplication repair: _support.check already deduplicates.",
+      "No new confusion matrix or financial-loss engine: a documented external fixture analysis suffices.",
+      "Keep descriptive rounding and existing unrounded threshold assessment.",
+      "Do not treat a wholly missing cost series as known zero or claim workflow costs absent from supplied records."
+    ],
+    "limits": [
+      "One source-packet plan review; reviewer did not execute tests. Helper implementations and some fixtures were outside the packet; findings were checked against the actual source.",
+      "AGY was requested with selector gemini-3.8-flash-high; no independent attestation of the backend model."
+    ]
+  },
+  "verification": "docs/VERIFICATION.json",
+  "followup_stress_test": {
+    "date": "2026-10-15T09:06:04.055004+00:00",
+    "baseline_commit": "85d8a06514b11d07619fc6b7742a95aee569536e",
+    "pre_edit_gate": "passed",
+    "tracked_files_unchanged_at_gate": true,
+    "reviews": {
+      "agy": {
+        "exit_code": 0,
+        "requested_model": "gemini-3.8-flash-high",
+        "started_at": "2026-10-15T08:57:51.699785+00:00",
+        "finished_at": "2026-10-15T09:02:17.396257+00:00",
+        "repository_unchanged": true,
+        "scope": "Read-only static source/plan review; test source and saved example reports omitted; no execution or independent backend attestation."
+      },
+      "claude": {
+        "exit_code": 0,
+        "requested_model": "claude-sonnet-5-5",
+        "provider_interface": "claude",
+        "started_at": "2026-10-15T08:57:10.678259+00:00",
+        "finished_at": "2026-10-15T08:58:12.742675+00:00",
+        "repository_unchanged": true,
+        "filesystem_protection": "All showcase directories mounted read-only.",
+        "scope": "Static supplied-source review; model tools disabled by request and Claude tool set empty; no independent backend attestation."
+      }
+    },
+    "adjudication": [
+      {
+        "id": "C1",
+        "finding": "Low: tiny costs lose precision in text/HTML.",
+        "disposition": "Accepted",
+        "reason": "Reproduced 0.021053 displayed as 0.02, and 0.0504 above a 0.05 maximum displayed as 0.05. Preserve the serialized value; keep unrounded comparisons.",
+        "verification": "tests/test_review_regressions.py"
+      },
+      {
+        "id": "C2 / G1",
+        "finding": "Low / medium: missing cost observations reported as known zero.",
+        "disposition": "Accepted",
+        "reason": "Reproduced absent column, missing cell and empty cohort. Emit null when no valid cost exists; retain measured zero. No observations yields missing evidence; partial totals remain partial.",
+        "verification": "tests/test_review_regressions.py"
+      },
+      {
+        "id": "C3",
+        "finding": "Low: deeply nested config may raise an unhandled RecursionError.",
+        "disposition": "Accepted after local reproduction",
+        "reason": "100,000 nested levels reproduced before edits; rethrow decoder RecursionError as ValueError so CLI returns structured exit 2.",
+        "verification": "tests/test_review_regressions.py"
+      },
+      {
+        "id": "C4",
+        "finding": "Low: review findings lack individual adjudication.",
+        "disposition": "Accepted / bounded",
+        "reason": "Append individual decisions for this round; keep prior record intact rather than rewriting historical decisions.",
+        "verification": "docs/REVIEW.md"
+      },
+      {
+        "id": "C5 / G2",
+        "finding": "Info / low: constant consumer branch for sibling tool.",
+        "disposition": "Accepted",
+        "reason": "Remove unreachable branch; retain only accuracy and outcome_coverage as mandatory core.",
+        "verification": "tests/test_stress.py"
+      },
+      {
+        "id": "G3",
+        "finding": "Low: omitted confusion cells not explicitly zero.",
+        "disposition": "Accepted",
+        "reason": "Name the three omitted pairings as zero in both cohorts. Existing fixture-count tests verify complete nonzero cells and sums of 40.",
+        "verification": "tests/test_case_study.py"
+      },
+      {
+        "id": "G4",
+        "finding": "Low: fixture alias protection may not support direct zip import.",
+        "disposition": "Bounded; no feature added",
+        "reason": "Support checkout and normal pip-installed wheel files, both exercised. Direct execution inside a zip archive is not a supported distribution path; no demonstrated overwrite on supported paths.",
+        "verification": "Packaging verification; resqmonitor/__main__.py"
+      },
+      {
+        "id": "G5",
+        "finding": "Low: evidence precedence absent from generated schema descriptions.",
+        "disposition": "Bounded; no schema edit",
+        "reason": "EVIDENCE_POLICY already documents precedence; schema enums define possible values. Keep generated MCP/JSON schema equality rather than hand-editing a generated copy.",
+        "verification": "docs/EVIDENCE_POLICY.md; tests/test_mcp.py"
+      }
+    ],
+    "limits": [
+      "Two static source/plan reviews, not independently executed tests.",
+      "AGY packet omitted tests and saved example JSON; Claude packet included test source, not test execution.",
+      "Requested model selectors are recorded; backend identity is not independently attested.",
+      "An initial AGY invocation failed before model execution; corrected invocation completed. No truncated final response in this round.",
+      "Targeted reproductions and verification were performed separately by the implementing agent."
+    ]
+  }
+}

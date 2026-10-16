@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>resqmonitor — Synthetic ticket classification</title><style>
+body{font:16px/1.6 system-ui,sans-serif;color:#172b43;background:#f3f6fa;margin:0}
+main{max-width:1100px;margin:auto;padding:32px 20px}h1{line-height:1.2;margin-bottom:8px}
+h2{font-size:1.1rem;margin:0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+article,section{background:white;border:1px solid #ccd6e3;border-radius:12px;padding:20px;margin-top:20px}
+.value{font-size:2rem;font-weight:700;margin:12px 0}.badge{display:inline-block;padding:3px 10px;border-radius:6px;font-weight:700}
+.ok{background:#d7f1df;color:#174c2d}.attention{background:#fff0c9;color:#614100}.unknown{background:#e7edf5;color:#35455e}
+.demo{font-weight:600;color:#5a3a00}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.85rem}
+summary{cursor:pointer;text-decoration:underline}footer{margin-top:24px;color:#425570}@media print{body{background:white}article{break-inside:avoid}}
+</style></head><body><main><header><h1>resqmonitor — Synthetic ticket classification</h1>
+<p>Overall status: <strong>ATTENTION</strong> · 2026-10-13T12:00:00+00:00</p>
+<p>criteria_not_met for supplied observations. No action authorized.</p>
+<p class="demo">Synthetic demonstration · fixed reference time</p><p>{&quot;rows&quot;: 40, &quot;evaluated_rows&quot;: 40, &quot;correct_rows&quot;: 26, &quot;pending_rows&quot;: 0, &quot;invalid_rows&quot;: 0, &quot;duplicate_id_rows&quot;: 0, &quot;accuracy_pct&quot;: 65.0, &quot;outcome_coverage_pct&quot;: 100.0, &quot;accuracy_wilson_95_pct&quot;: [49.50588083725769, 77.86547112682372]}</p></header><div class="grid"><article><h2>Observed accuracy</h2><p class="value">65.0 %</p><p class="badge attention">ATTENTION</p><p>Threshold: <strong>attention</strong> · Evidence: <strong>sufficient</strong></p><p>THRESHOLD_NOT_MET</p><p>Exact label matches among supplied reference outcomes. Count, outcome coverage and valid records govern the verdict.</p><p>Rule: {&quot;minimum&quot;: 85, &quot;maximum&quot;: null, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 65.0}</p><details><summary>Calculation evidence</summary><pre>{
+  &quot;correct_rows&quot;: 26,
+  &quot;evaluated_rows&quot;: 40,
+  &quot;minimum_evaluated_rows&quot;: 30,
+  &quot;wilson_95_interval_pct&quot;: [
+    49.50588083725769,
+    77.86547112682372
+  ],
+  &quot;outcome_coverage_pct&quot;: 100.0,
+  &quot;minimum_outcome_coverage_pct&quot;: 90,
+  &quot;interval_assumptions&quot;: &quot;independent_binomial_sample_not_verified&quot;,
+  &quot;minimum_accuracy_pct&quot;: 85
+}</pre></details></article><article><h2>Outcome coverage</h2><p class="value">100.0 %</p><p class="badge ok">OK</p><p>Threshold: <strong>ok</strong> · Evidence: <strong>sufficient</strong></p><p>No evidence issues under the declared policy</p><p>Valid completed outcomes divided by all supplied rows, including pending and invalid rows.</p><p>Rule: {&quot;minimum&quot;: 90, &quot;maximum&quot;: null, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 100.0}</p><details><summary>Calculation evidence</summary><pre>{
+  &quot;evaluated_rows&quot;: 40,
+  &quot;all_rows&quot;: 40,
+  &quot;pending_rows&quot;: 0,
+  &quot;invalid_rows&quot;: 0,
+  &quot;minimum_pct&quot;: 90
+}</pre></details></article><article><h2>Confidence alignment</h2><p class="value">29.0 pp</p><p class="badge attention">ATTENTION</p><p>Threshold: <strong>attention</strong> · Evidence: <strong>sufficient</strong></p><p>THRESHOLD_NOT_MET</p><p>Absolute gap between mean reported confidence and accuracy on paired rows; this is a warning heuristic.</p><p>Rule: {&quot;minimum&quot;: null, &quot;maximum&quot;: 10, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 29.0}</p><details><summary>Calculation evidence</summary><pre>{
+  &quot;paired_rows&quot;: 40,
+  &quot;mean_confidence_pct&quot;: 94.0,
+  &quot;paired_accuracy_pct&quot;: 65.0,
+  &quot;maximum_gap_pp&quot;: 10,
+  &quot;minimum_paired_rows&quot;: 30
+}</pre></details></article><article><h2>Cost per correct result</h2><p class="value">0.076923 EUR</p><p class="badge attention">ATTENTION</p><p>Threshold: <strong>attention</strong> · Evidence: <strong>sufficient</strong></p><p>THRESHOLD_NOT_MET</p><p>Total cost of supplied classification outputs divided by correct outcomes. Incomplete or zero-success samples are unknown.</p><p>Rule: {&quot;minimum&quot;: null, &quot;maximum&quot;: 0.05, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 0.076923}</p><details><summary>Calculation evidence</summary><pre>{
+  &quot;cost_rows&quot;: 40,
+  &quot;all_rows&quot;: 40,
+  &quot;correct_rows&quot;: 26,
+  &quot;known_total_cost&quot;: 2.0,
+  &quot;cost_unit&quot;: &quot;EUR&quot;,
+  &quot;maximum&quot;: 0.05,
+  &quot;all_outcomes_complete&quot;: true
+}</pre></details></article><article><h2>Mean latency</h2><p class="value">440.0 ms</p><p class="badge attention">ATTENTION</p><p>Threshold: <strong>attention</strong> · Evidence: <strong>sufficient</strong></p><p>THRESHOLD_NOT_MET</p><p>Mean and nearest-rank p95 over instrumented rows; incomplete latency coverage keeps the verdict unknown.</p><p>Rule: {&quot;minimum&quot;: null, &quot;maximum&quot;: 300, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 440.0}</p><details><summary>Calculation evidence</summary><pre>{
+  &quot;latency_rows&quot;: 40,
+  &quot;all_rows&quot;: 40,
+  &quot;p95_ms&quot;: 460.0,
+  &quot;maximum_mean_ms&quot;: 300
+}</pre></details></article><article><h2>Accuracy change from baseline</h2><p class="value">-25.0 pp</p><p class="badge attention">ATTENTION</p><p>Threshold: <strong>attention</strong> · Evidence: <strong>sufficient</strong></p><p>THRESHOLD_NOT_MET</p><p>Current minus baseline accuracy. Samples and outcome coverage must meet their minimums; this is descriptive, not causal.</p><p>Rule: {&quot;minimum&quot;: -10, &quot;maximum&quot;: null, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: -25.0}</p><details><summary>Calculation evidence</summary><pre>{
+  &quot;current_accuracy_pct&quot;: 65.0,
+  &quot;baseline_accuracy_pct&quot;: 90.0,
+  &quot;current_evaluated_rows&quot;: 40,
+  &quot;baseline_evaluated_rows&quot;: 40,
+  &quot;allowed_drop_pp&quot;: 10
+}</pre></details></article><article><h2>Case mix shift</h2><p class="value">0.0 %</p><p class="badge ok">OK</p><p>Threshold: <strong>ok</strong> · Evidence: <strong>sufficient</strong></p><p>No evidence issues under the declared policy</p><p>Total variation in supplied group shares. Changed case mix may affect accuracy comparisons.</p><p>Rule: {&quot;minimum&quot;: null, &quot;maximum&quot;: 20, &quot;basis&quot;: &quot;point_estimate&quot;, &quot;assessment_value&quot;: 0.0}</p><details><summary>Calculation evidence</summary><pre>{
+  &quot;current_groups&quot;: {
+    &quot;observed&quot;: true,
+    &quot;missing_group_rows&quot;: 0,
+    &quot;groups&quot;: [
+      {
+        &quot;group&quot;: &quot;business&quot;,
+        &quot;rows&quot;: 20,
+        &quot;evaluated_rows&quot;: 20,
+        &quot;correct_rows&quot;: 6,
+        &quot;accuracy_pct&quot;: 30.0,
+        &quot;enough_evidence&quot;: false
+      },
+      {
+        &quot;group&quot;: &quot;consumer&quot;,
+        &quot;rows&quot;: 20,
+        &quot;evaluated_rows&quot;: 20,
+        &quot;correct_rows&quot;: 20,
+        &quot;accuracy_pct&quot;: 100.0,
+        &quot;enough_evidence&quot;: false
+      }
+    ]
+  },
+  &quot;baseline_groups&quot;: {
+    &quot;observed&quot;: true,
+    &quot;missing_group_rows&quot;: 0,
+    &quot;groups&quot;: [
+      {
+        &quot;group&quot;: &quot;business&quot;,
+        &quot;rows&quot;: 20,
+        &quot;evaluated_rows&quot;: 20,
+        &quot;correct_rows&quot;: 16,
+        &quot;accuracy_pct&quot;: 80.0,
+        &quot;enough_evidence&quot;: false
+      },
+      {
+        &quot;group&quot;: &quot;consumer&quot;,
+        &quot;rows&quot;: 20,
+        &quot;evaluated_rows&quot;: 20,
+        &quot;correct_rows&quot;: 20,
+        &quot;accuracy_pct&quot;: 100.0,
+        &quot;enough_evidence&quot;: false
+      }
+    ]
+  },
+  &quot;maximum_shift_pct&quot;: 20
+}</pre></details></article></div>
+<section><h2>Findings</h2><ul><li><strong>CHECK_ACCURACY</strong>: Observed accuracy does not meet its configured threshold.</li><li><strong>CHECK_CONFIDENCE_ALIGNMENT</strong>: Confidence alignment does not meet its configured threshold.</li><li><strong>CHECK_COST_PER_CORRECT</strong>: Cost per correct result does not meet its configured threshold.</li><li><strong>CHECK_LATENCY</strong>: Mean latency does not meet its configured threshold.</li><li><strong>CHECK_BASELINE_ACCURACY</strong>: Accuracy change from baseline does not meet its configured threshold.</li></ul></section>
+<section><h2>Policy and provenance</h2><details><summary>Declared rules and input fingerprints</summary><pre>{
+  &quot;policy&quot;: {
+    &quot;dataset_name&quot;: &quot;Synthetic ticket classification&quot;,
+    &quot;id_column&quot;: &quot;record_id&quot;,
+    &quot;prediction_column&quot;: &quot;predicted_label&quot;,
+    &quot;outcome_column&quot;: &quot;actual_label&quot;,
+    &quot;confidence_column&quot;: &quot;confidence&quot;,
+    &quot;cost_column&quot;: &quot;cost&quot;,
+    &quot;latency_column&quot;: &quot;latency_ms&quot;,
+    &quot;group_column&quot;: &quot;group&quot;,
+    &quot;cost_unit&quot;: &quot;EUR&quot;,
+    &quot;min_evaluated_rows&quot;: 30,
+    &quot;min_accuracy_pct&quot;: 85,
+    &quot;accuracy_threshold_basis&quot;: &quot;point_estimate&quot;,
+    &quot;evidence_context&quot;: {
+      &quot;purpose&quot;: &quot;Illustrate declared acceptance criteria with synthetic observations.&quot;,
+      &quot;population&quot;: &quot;Bundled synthetic examples only.&quot;,
+      &quot;sampling_method&quot;: &quot;Constructed fixtures; not a random or production sample.&quot;,
+      &quot;reference_basis&quot;: &quot;Constructed reference labels; no independent real-world adjudication.&quot;
+    },
+    &quot;min_outcome_coverage_pct&quot;: 90,
+    &quot;max_confidence_gap_pp&quot;: 10,
+    &quot;allowed_accuracy_drop_pp&quot;: 10,
+    &quot;max_case_mix_shift_pct&quot;: 20,
+    &quot;max_cost_per_correct&quot;: 0.05,
+    &quot;max_mean_latency_ms&quot;: 300
+  },
+  &quot;provenance&quot;: {
+    &quot;input_sha256&quot;: {
+      &quot;current&quot;: &quot;420fbb612f178ce71d24dd49be4ece778ee299514c9294bdf71a563e63636bb8&quot;,
+      &quot;baseline&quot;: &quot;9120458a522c5b797a3e61e3f237c6b45977c21681013c0452b244b5630a91fc&quot;
+    },
+    &quot;policy_sha256&quot;: &quot;736f99008cdac77c9c6a04873439456bfc3ec359de9749e2a08d9da14c5a266f&quot;,
+    &quot;source_verification&quot;: &quot;not_performed&quot;,
+    &quot;context_verification&quot;: &quot;not_performed&quot;,
+    &quot;generalization&quot;: &quot;not_assessed&quot;
+  }
+}</pre></details></section>
+<section><h2>What this report establishes</h2><ul><li>Overall status covers: accuracy, outcome_coverage, confidence_alignment, cost_per_correct, latency, baseline_accuracy, case_mix. Other diagnostics remain separately visible.</li><li>Outcome labels are supplied evidence, not independently established ground truth.</li><li>Evidence sufficiency means declared local guardrails are met; reference validity and generalization are not assessed.</li><li>Input fingerprints identify supplied text; they do not authenticate its source or authorize agent actions.</li><li>Exact-match classification metrics do not assess free-form text quality or safety.</li><li>Sample-size limits and Wilson intervals do not establish representativeness or causal model regression.</li><li>Group accuracies below the minimum evaluated count are descriptive only; check subgroup counts separately.</li><li>Reports include aggregate counts, category/group names and record numbers, not IDs or raw rows.</li><li>These records describe classification outputs. Account for retries upstream; no-output failures need separate workflow accounting.</li></ul></section>
+<footer>Local calculations. No model calls, telemetry, or external page assets.</footer>
+</main></body></html>

@@ -1,0 +1,338 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "Check": {
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "ok",
+            "attention",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "evidence": {
+          "additionalProperties": true,
+          "title": "Evidence",
+          "type": "object"
+        },
+        "threshold_status": {
+          "enum": [
+            "ok",
+            "attention",
+            "unknown"
+          ],
+          "title": "Threshold Status",
+          "type": "string"
+        },
+        "evidence_status": {
+          "enum": [
+            "sufficient",
+            "insufficient",
+            "missing",
+            "invalid",
+            "not_configured"
+          ],
+          "title": "Evidence Status",
+          "type": "string"
+        },
+        "reason_codes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "threshold": {
+          "$ref": "#/$defs/Threshold"
+        }
+      },
+      "required": [
+        "label",
+        "status",
+        "value",
+        "unit",
+        "message",
+        "evidence",
+        "threshold_status",
+        "evidence_status",
+        "reason_codes",
+        "threshold"
+      ],
+      "title": "Check",
+      "type": "object"
+    },
+    "Decision": {
+      "properties": {
+        "outcome": {
+          "enum": [
+            "criteria_met",
+            "criteria_not_met",
+            "undetermined"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "scope": {
+          "const": "supplied_observations",
+          "title": "Scope",
+          "type": "string"
+        },
+        "required_checks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Checks",
+          "type": "array"
+        },
+        "action_authorized": {
+          "const": false,
+          "title": "Action Authorized",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "outcome",
+        "scope",
+        "required_checks",
+        "action_authorized"
+      ],
+      "title": "Decision",
+      "type": "object"
+    },
+    "Provenance": {
+      "properties": {
+        "input_sha256": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Input Sha256",
+          "type": "object"
+        },
+        "policy_sha256": {
+          "title": "Policy Sha256",
+          "type": "string"
+        },
+        "source_verification": {
+          "const": "not_performed",
+          "title": "Source Verification",
+          "type": "string"
+        },
+        "context_verification": {
+          "const": "not_performed",
+          "title": "Context Verification",
+          "type": "string"
+        },
+        "generalization": {
+          "const": "not_assessed",
+          "title": "Generalization",
+          "type": "string"
+        }
+      },
+      "required": [
+        "input_sha256",
+        "policy_sha256",
+        "source_verification",
+        "context_verification",
+        "generalization"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "Threshold": {
+      "properties": {
+        "minimum": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Minimum"
+        },
+        "maximum": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Maximum"
+        },
+        "basis": {
+          "enum": [
+            "point_estimate",
+            "wilson_lower_bound"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "assessment_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Assessment Value"
+        }
+      },
+      "required": [
+        "minimum",
+        "maximum",
+        "basis",
+        "assessment_value"
+      ],
+      "title": "Threshold",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "2.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tool": {
+      "const": "resqmonitor",
+      "title": "Tool",
+      "type": "string"
+    },
+    "dataset": {
+      "title": "Dataset",
+      "type": "string"
+    },
+    "evaluated_at": {
+      "title": "Evaluated At",
+      "type": "string"
+    },
+    "synthetic": {
+      "title": "Synthetic",
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "ok",
+        "attention",
+        "unknown"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "decision": {
+      "$ref": "#/$defs/Decision"
+    },
+    "policy": {
+      "additionalProperties": true,
+      "title": "Policy",
+      "type": "object"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "summary": {
+      "additionalProperties": true,
+      "title": "Summary",
+      "type": "object"
+    },
+    "checks": {
+      "additionalProperties": {
+        "$ref": "#/$defs/Check"
+      },
+      "title": "Checks",
+      "type": "object"
+    },
+    "findings": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    },
+    "scenario": {
+      "title": "Scenario",
+      "type": "string"
+    },
+    "baseline_summary": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Baseline Summary"
+    },
+    "groups": {
+      "additionalProperties": true,
+      "title": "Groups",
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "tool",
+    "dataset",
+    "evaluated_at",
+    "synthetic",
+    "status",
+    "decision",
+    "policy",
+    "provenance",
+    "summary",
+    "checks",
+    "findings",
+    "notes",
+    "baseline_summary",
+    "groups"
+  ],
+  "title": "Report",
+  "type": "object"
+}

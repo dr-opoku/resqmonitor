@@ -1,0 +1,129 @@
+{
+  "schema_version": "1.0",
+  "repository": "resqmonitor",
+  "checked_at": "2026-10-15T09:10:37.807063+00:00",
+  "python": "3.12.3",
+  "tests": {
+    "discovered": 38,
+    "passed": 38,
+    "failed": 0,
+    "skipped": 0,
+    "command": "python3 -m unittest discover -s tests -v"
+  },
+  "optional_mcp": {
+    "tested": true,
+    "sdk_version": "2.3.0",
+    "checks": 4,
+    "real_local_stdio_exchange": true
+  },
+  "saved_reports": {
+    "deterministic_reproduction": "passed",
+    "command": "python3 scripts/reproduce_examples.py --check",
+    "live_model_calls": false
+  },
+  "json_schema_validation": {
+    "passed": true,
+    "artifacts": 4,
+    "validator_version": "4.26.0"
+  },
+  "markdown_local_targets": {
+    "passed": true,
+    "targets_checked": 38
+  },
+  "ci": {
+    "configured_python_versions": [
+      "3.11",
+      "3.13"
+    ],
+    "github_execution": "success",
+    "model_or_credentials_needed": false,
+    "token_contents": "read",
+    "observed_at": "2026-10-15T09:12:01.632939+00:00",
+    "observed_source_commit": "633d21eb06aeff6c47ed080ccf4f56a038a81bb2",
+    "run_url": "https://github.com/dr-opoku/resqmonitor/actions/runs/38711055134",
+    "jobs": [
+      {
+        "name": "core (3.13)",
+        "conclusion": "success"
+      },
+      {
+        "name": "optional-mcp",
+        "conclusion": "success"
+      },
+      {
+        "name": "core (3.11)",
+        "conclusion": "success"
+      }
+    ],
+    "record_scope": "Observed successful run at the stated implementation commit. This subsequent verification-record-only commit triggers its own checks."
+  },
+  "pre_edit_stress_review": {
+    "passed": true,
+    "independent_reviews": 2,
+    "requested_agy_model": "gemini-3.8-flash-high",
+    "requested_claude_code_model": "claude-sonnet-5-5",
+    "backend_identity_attested": false,
+    "reviewer_executed_tests": false,
+    "details": "REVIEW.md",
+    "current_round_scope": "Two complete static source/plan reviews before this round of edits, followed by implementing-agent reproductions, tests and package verification."
+  },
+  "scope_limits": [
+    "Tests establish declared implementation behavior, not reference-label truth or representative performance.",
+    "The JSON consumer checks internal structure, not authenticity or original-data correctness.",
+    "Licensing, contribution rights and public release remain owner decisions."
+  ],
+  "packaging": {
+    "state": "passed",
+    "wheel_build": "passed",
+    "sdist_build": "passed",
+    "wheel_source_bytes": "matched",
+    "fresh_wheel_install": "passed_without_dependencies",
+    "wheel_command_directory": "outside_checkout",
+    "wheel_demo_scenarios": 4,
+    "wheel_saved_report_comparison": "matched",
+    "real_capture_wheel_replay": false,
+    "sdist_tests_discovered": 38,
+    "sdist_tests_passed": 34,
+    "sdist_tests_skipped": 4,
+    "sdist_skips_reason": "Optional MCP SDK intentionally absent from clean core environment",
+    "sdist_saved_report_reproduction": "passed"
+  },
+  "preceding_verification": {
+    "checked_at": "2026-10-15T06:56:34.339978+00:00",
+    "ci": {
+      "configured_python_versions": [
+        "3.11",
+        "3.13"
+      ],
+      "github_execution": "success",
+      "model_or_credentials_needed": false,
+      "token_contents": "read",
+      "initial_failure": "Python 3.11 float sum produced different displayed aggregates; replaced with explicit stable accumulation and reproduced the regression before repair.",
+      "observed_source_commit": "27ab4169c1a4fd5e2583e5c93c7c241995e1cbca",
+      "run_url": "https://github.com/dr-opoku/resqmonitor/actions/runs/38695576295",
+      "jobs": [
+        {
+          "name": "core (3.11)",
+          "conclusion": "success"
+        },
+        {
+          "name": "core (3.13)",
+          "conclusion": "success"
+        },
+        {
+          "name": "optional-mcp",
+          "conclusion": "success"
+        }
+      ],
+      "record_scope": "Observed run at the stated source commit; later documentation-only commits trigger separate runs."
+    },
+    "scope": "Historical verification; CI refers only to its explicitly recorded source commit."
+  },
+  "additional_python311_core": {
+    "python": "3.11.17",
+    "tests": 38,
+    "passed": 34,
+    "skipped_optional_mcp": 4,
+    "saved_reports_reproduce": true
+  }
+}

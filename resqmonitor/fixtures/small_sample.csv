@@ -1,0 +1,2 @@
+record_id,predicted_label,actual_label,confidence,cost,latency_ms,group
+T001,billing,billing,0.92,0.02,170,consumer
