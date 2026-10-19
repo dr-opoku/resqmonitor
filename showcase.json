@@ -42,12 +42,20 @@
   },
   "license": {
     "status": "selected",
-    "name": "Noncommercial Local Use License 1.0.0",
-    "identifier": "LicenseRef-Noncommercial-Local-Use-1.0.0",
+    "name": "Noncommercial Local Use License 1.1.0",
+    "identifier": "LicenseRef-Noncommercial-Local-Use-1.1.0",
     "file": "LICENSE.md",
     "open_source": false,
     "commercial_use": "separate_written_license_required",
-    "redistribution": "separate_written_permission_required_subject_to_reserved_rights"
+    "redistribution": "software_requires_separate_written_permission_subject_to_reserved_rights",
+    "completed_reports": {
+      "noncommercial_copy_display_and_distribution": "permitted_under_section_3",
+      "recipient_further_sharing": "same_terms",
+      "template_or_component_extraction": "not_permitted",
+      "legal_notices": "preserve_included_notices",
+      "changed_findings": "clearly_identify_changes",
+      "third_party_rights": "unaffected"
+    }
   },
   "evidence_policy": "docs/EVIDENCE_POLICY.md",
   "standards_review": {

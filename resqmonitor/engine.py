@@ -362,7 +362,7 @@ def analyze(csv_text: str, config: dict[str, Any] | None = None, *,
         "summary": summary, "checks": checks, "findings": findings,
         "baseline_summary": baseline_summary, "groups": groups,
         "notes": [
-            "Overall status covers: " + ", ".join(critical) + ". Other diagnostics remain separately visible.",
+            "Overall status combines required checks (" + ", ".join(critical) + ") and recorded findings. Other check results remain separately visible.",
             "Outcome labels are supplied evidence, not independently established ground truth.",
             "Evidence sufficiency means declared local guardrails are met; reference validity and generalization are not assessed.",
             "Input fingerprints identify supplied text; they do not authenticate its source or authorize agent actions.",

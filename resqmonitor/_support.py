@@ -7,12 +7,26 @@ import hashlib
 import io
 import json
 import math
+import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 MAX_BYTES = 5 * 1024 * 1024
 MAX_ROWS = 50_000
+
+
+def terminal_text(text: str) -> str:
+    """Make terminal controls visible; retain report newlines and tabs for layout.
+
+    This is display hygiene, not authentication or a log-injection boundary.
+    Machine-readable reports retain the original strings.
+    """
+    return "".join(
+        char.encode("unicode_escape").decode("ascii")
+        if char not in "\n\t" and unicodedata.category(char) in {"Cc", "Cf", "Zl", "Zp"}
+        else char for char in text
+    )
 
 
 def read_file(path: Path) -> str:

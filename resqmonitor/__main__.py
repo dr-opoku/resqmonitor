@@ -8,7 +8,7 @@ from pathlib import Path
 from importlib.resources import files
 
 from . import __version__
-from ._support import json_object, read_file
+from ._support import json_object, read_file, terminal_text
 from .demo import SCENARIOS, demo
 from .engine import analyze
 from .report import as_html, as_json, as_text
@@ -80,7 +80,7 @@ def main(argv: list[str] | None = None) -> int:
                 "error": {"code": "INVALID_INPUT", "message": str(exc)},
             }))
         else:
-            print(f"resqmonitor: {exc}", file=sys.stderr)
+            print(terminal_text(f"resqmonitor: {exc}"), file=sys.stderr)
         return 2
 
 

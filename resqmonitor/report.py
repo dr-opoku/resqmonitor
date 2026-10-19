@@ -5,6 +5,7 @@ from __future__ import annotations
 import html
 import json
 from typing import Any
+from ._support import terminal_text
 
 
 def as_json(report: dict[str, Any]) -> str:
@@ -36,7 +37,7 @@ def as_text(report: dict[str, Any]) -> str:
     lines.append(json.dumps({key: report[key] for key in ("policy", "provenance")}, ensure_ascii=False, allow_nan=False))
     lines.append("\nScope:")
     lines.extend(f"- {note}" for note in report["notes"])
-    return "\n".join(lines) + "\n"
+    return terminal_text("\n".join(lines) + "\n")
 
 
 def as_html(report: dict[str, Any]) -> str:

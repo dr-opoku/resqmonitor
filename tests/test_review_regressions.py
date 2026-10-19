@@ -11,6 +11,28 @@ from resqmonitor.demo import demo
 from resqmonitor.report import as_text, as_html
 
 class ReviewRegressionTests(unittest.TestCase):
+    def test_overall_note_explains_findings_outside_required_checks(self):
+        from resqmonitor.engine import analyze
+        report = analyze('record_id,predicted_label,actual_label,cost\na,x,x,invalid\n',
+                         {'min_evaluated_rows': 1})
+        self.assertTrue(all(report['checks'][key]['status'] == 'ok'
+                            for key in report['decision']['required_checks']))
+        self.assertTrue(report['findings'])
+        self.assertEqual(report['status'], 'attention')
+        self.assertIn('and recorded findings', report['notes'][0])
+
+    def test_text_escapes_terminal_controls_without_changing_report_data(self):
+        from resqmonitor.report import as_json
+        report = demo('healthy')
+        payload = 'source\x1b[2J\rFORGED\x9b31m\u202eend'
+        report['dataset'] = payload
+        rendered = as_text(report)
+        for control in ('\x1b', '\r', '\x9b', '\u202e'):
+            self.assertNotIn(control, rendered)
+        self.assertIn('\\x1b[2J', rendered)
+        self.assertEqual(json.loads(as_json(report))['dataset'], payload)
+        self.assertIn('\nEvaluated at:', rendered)
+
     def test_excessive_config_nesting_is_an_input_error(self):
         text = '{"x":' + '[' * 100000 + '0' + ']' * 100000 + '}'
         with self.assertRaisesRegex(ValueError, 'nesting'):

@@ -51,7 +51,7 @@
     },
     {
       "id": "rights",
-      "action": "Include the owner-selected Noncommercial Local Use License 1.0.0 unchanged; align current human/agent metadata and packaging. Do not silently add report-sharing, business-evaluation or contribution exceptions.",
+      "action": "Include the owner-selected Noncommercial Local Use License 1.1.0 with the explicitly approved noncommercial completed report exception; align current human/agent metadata and packaging. Do not add business-evaluation or public-code-contribution exceptions.",
       "acceptance": "No implicit free-use or redistribution grant and no claim that source availability is open source.",
       "status": "implemented_owner_selected_license"
     },
@@ -80,7 +80,7 @@
   ],
   "pre_edit_gate": "Record baseline tests and one independent Gemini 3.8 Flash review of this plan and supplied source before repository edits. Revise actions against concrete findings.",
   "publication_gate": [
-    "Owner decision on report-sharing/evaluation exceptions and contribution workflow; current restrictive license is already supplied",
+    "Owner decision on any business-evaluation exception and contribution workflow; license and approved noncommercial completed report exception are supplied",
     "Owner-approved visibility and release",
     "Separate evidence for any real customer, commercial or production claim"
   ],
@@ -221,6 +221,19 @@
     "status": "selected_and_included",
     "guidance": "PROJECT_STATUS.md",
     "publication_findings": "PUBLICATION_STATUS.md",
-    "historical_review_records": "Dated stress-test decisions above retain the scope and decisions of their original review."
+    "historical_review_records": "Dated stress-test decisions above retain the scope and decisions of their original review.",
+    "version": "1.1.0",
+    "completed_report_exception": "adopted_noncommercial_only_section_3"
+  },
+  "integration_followup_2026_10_19": {
+    "owner_request": "Correct report presentation, adopt noncommercial completed report exception, verify and merge into main.",
+    "pre_edit_stress": "Targeted regressions exercised the previous implementation before corrections; historical external reviews above are not new model reviews.",
+    "scope": [
+      "Explicit noncommercial report sharing in license and human/agent/package metadata",
+      "Accurate generated report note and deterministic saved reports",
+      "Explicit optional dependency and terminal display hygiene"
+    ],
+    "verification": "VERIFICATION.json",
+    "repository_visibility": "unchanged"
   }
 }

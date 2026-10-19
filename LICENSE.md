@@ -1,4 +1,4 @@
-# Noncommercial Local Use License 1.0.0
+# Noncommercial Local Use License 1.1.0
 
 Copyright (c) 2026 Dr. Daniel A. Opoku. All rights reserved except as expressly granted below.
 
@@ -28,13 +28,19 @@ You must preserve copyright, license, and other legal notices in the copies you 
 
 ## 3. No redistribution or provision to others
 
-Except for the limited hosting-platform rights in section 4, this license does not permit you to distribute, publish, sell, rent, lend, sublicense, transfer, or otherwise provide copies of the software, modified versions, works incorporating the software, or portions of any of these to another individual or legal entity.
+Except for the completed report exception below and the limited hosting-platform rights in section 4, this license does not permit you to distribute, publish, sell, rent, lend, sublicense, transfer, or otherwise provide copies of the software, modified versions, works incorporating the software, or portions of any of these to another individual or legal entity.
 
-In particular, you may not publish modified forks, upload copies to package registries or download sites, bundle the software into another distributed product, or offer other users network access to run or interact with the software as a service. A free service or free download is not an exception. Redistribution or service provision requires separate written permission from the licensor, even when noncommercial.
+In particular, you may not publish modified forks, upload copies to package registries or download sites, bundle the software into another distributed product, or offer other users network access to run or interact with the software as a service. A free service or free software download is not an exception. Redistribution or service provision requires separate written permission from the licensor, even when noncommercial.
 
 Private copies and access solely for the same licensee's permitted local use under sections 1 and 2 are not redistribution to another licensee. Sharing with a separate affiliate, client, or independent recipient is not covered by this exception.
 
 This restriction concerns the software and works incorporating it. It does not claim ownership of your input data or independently created outputs that contain no protected part of the software. It does not authorize commercial use of the software to produce those outputs.
+
+### Completed report exception
+
+For noncommercial purposes as defined in section 1, you may copy, display and distribute completed reports lawfully generated under this license, including the HTML structure, CSS, labels and explanatory text embedded by the software to present those reports. Recipients may display and further share those reports on the same terms.
+
+This exception does not permit extracting or reusing report templates or other software components, redistributing any other part of the software, or operating the software for commercial purposes. Preserve included legal notices and clearly identify changes to reported findings. Third-party rights remain unaffected.
 
 ## 4. Limited hosting-platform rights
 
