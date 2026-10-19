@@ -317,7 +317,7 @@
     ]
   },
   "notes": [
-    "Overall status covers: accuracy, outcome_coverage, confidence_alignment, cost_per_correct, latency, baseline_accuracy, case_mix. Other diagnostics remain separately visible.",
+    "Overall status combines required checks (accuracy, outcome_coverage, confidence_alignment, cost_per_correct, latency, baseline_accuracy, case_mix) and recorded findings. Other check results remain separately visible.",
     "Outcome labels are supplied evidence, not independently established ground truth.",
     "Evidence sufficiency means declared local guardrails are met; reference validity and generalization are not assessed.",
     "Input fingerprints identify supplied text; they do not authenticate its source or authorize agent actions.",
