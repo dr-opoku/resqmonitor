@@ -80,7 +80,6 @@
   ],
   "pre_edit_gate": "Record baseline tests and one independent Gemini 3.8 Flash review of this plan and supplied source before repository edits. Revise actions against concrete findings.",
   "publication_gate": [
-    "Owner decision on any business-evaluation exception and contribution workflow; license and approved noncommercial completed report exception are supplied",
     "Owner-approved visibility and release",
     "Separate evidence for any real customer, commercial or production claim"
   ],
@@ -223,7 +222,9 @@
     "publication_findings": "PUBLICATION_STATUS.md",
     "historical_review_records": "Dated stress-test decisions above retain the scope and decisions of their original review.",
     "version": "1.1.0",
-    "completed_report_exception": "adopted_noncommercial_only_section_3"
+    "completed_report_exception": "adopted_noncommercial_only_section_3",
+    "business_evaluation_exception": "not_adopted",
+    "public_code_contribution_exception": "not_adopted"
   },
   "integration_followup_2026_10_19": {
     "owner_request": "Correct report presentation, adopt noncommercial completed report exception, verify and merge into main.",
