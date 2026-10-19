@@ -4,6 +4,8 @@
 
 A small, local monitor for categorical predictions and supplied outcome labels. It reports accuracy, outcome coverage, confidence alignment, cost per correct result, latency, and changes from a baseline. The core uses no AI model, account, database, or network connection.
 
+**Usage:** private local noncommercial use is permitted under the [license](LICENSE.md). Business evaluation for a commercial application requires separate written permission; see [usage guidance](docs/PROJECT_STATUS.md).
+
 ## Try it in one command
 
 Requires Python **3.11 or newer**. Verified on Linux; the installation commands below use POSIX paths. Windows behavior has not been verified. From this repository directory:
@@ -159,4 +161,4 @@ See the [repository action plan](docs/ACTION_PLAN.json), [pre-change stress test
 
 ## License and release status
 
-Initial showcase implementation. A redistribution license has not yet been selected. License selection is an owner decision before public release. Synthetic examples do not establish production performance.
+Licensed under the [Noncommercial Local Use License 1.0.0](LICENSE.md): private local noncommercial use and modification are permitted; redistribution requires separate written permission, subject to reserved platform/statutory rights; commercial use requires a separate written license. This is source-available, not open source. See [usage, evaluation and contribution guidance](docs/PROJECT_STATUS.md) and [current publication findings](docs/PUBLICATION_STATUS.md). Repository visibility is a separate owner decision.

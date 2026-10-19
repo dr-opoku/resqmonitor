@@ -33,7 +33,7 @@
     },
     {
       "id": "navigation",
-      "action": "Use Markdown links in llms.txt, consistent license-pending wording and a prominent modest cross-reference to all three independent showcases; maintain AGENTS.md and project-local showcase.json.",
+      "action": "Use Markdown links in llms.txt, consistent references to the owner-selected license and a prominent modest cross-reference to all three independent showcases; maintain AGENTS.md and project-local showcase.json.",
       "acceptance": "No invented interoperability standard, purchase permission, software integration or production claim.",
       "status": "implemented_and_locally_verified"
     },
@@ -51,9 +51,9 @@
     },
     {
       "id": "rights",
-      "action": "Keep license unselected; document the owner decisions needed for noncommercial/research/procurement use and future commercial terms. Do not create a LICENSE, checkout, release, price or visibility change.",
+      "action": "Include the owner-selected Noncommercial Local Use License 1.0.0 unchanged; align current human/agent metadata and packaging. Do not silently add report-sharing, business-evaluation or contribution exceptions.",
       "acceptance": "No implicit free-use or redistribution grant and no claim that source availability is open source.",
-      "status": "documented_owner_decision_pending"
+      "status": "implemented_owner_selected_license"
     },
     {
       "id": "reviewed_repairs",
@@ -80,7 +80,7 @@
   ],
   "pre_edit_gate": "Record baseline tests and one independent Gemini 3.8 Flash review of this plan and supplied source before repository edits. Revise actions against concrete findings.",
   "publication_gate": [
-    "Owner-selected license and contribution rights",
+    "Owner decision on report-sharing/evaluation exceptions and contribution workflow; current restrictive license is already supplied",
     "Owner-approved visibility and release",
     "Separate evidence for any real customer, commercial or production claim"
   ],
@@ -214,5 +214,13 @@
       "An initial AGY invocation failed before model execution; corrected invocation completed. No truncated final response in this round.",
       "Targeted reproductions and verification were performed separately by the implementing agent."
     ]
+  },
+  "current_rights": {
+    "updated_at": "2026-10-19",
+    "license": "../LICENSE.md",
+    "status": "selected_and_included",
+    "guidance": "PROJECT_STATUS.md",
+    "publication_findings": "PUBLICATION_STATUS.md",
+    "historical_review_records": "Dated stress-test decisions above retain the scope and decisions of their original review."
   }
 }

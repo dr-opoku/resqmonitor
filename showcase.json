@@ -41,7 +41,13 @@
     "csv_records": 50000
   },
   "license": {
-    "status": "not_selected"
+    "status": "selected",
+    "name": "Noncommercial Local Use License 1.0.0",
+    "identifier": "LicenseRef-Noncommercial-Local-Use-1.0.0",
+    "file": "LICENSE.md",
+    "open_source": false,
+    "commercial_use": "separate_written_license_required",
+    "redistribution": "separate_written_permission_required_subject_to_reserved_rights"
   },
   "evidence_policy": "docs/EVIDENCE_POLICY.md",
   "standards_review": {
@@ -66,5 +72,6 @@
       "2": "invalid or error report"
     },
     "authenticity_verified": false
-  }
+  },
+  "publication_status": "docs/PUBLICATION_STATUS.md"
 }
