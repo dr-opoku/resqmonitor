@@ -1,0 +1,2 @@
+# Preserve whitespace inside supplied compiled JavaScript template literals.
+docs/interface/site/assets/*.js -whitespace

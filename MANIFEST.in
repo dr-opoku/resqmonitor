@@ -5,3 +5,6 @@ recursive-include tests *.py
 recursive-include scripts *.py
 recursive-include examples *.json *.txt *.html
 recursive-include .github/workflows *.yml
+
+# The compiled preview is a repository artifact, not part of the Python package.
+prune docs/interface

@@ -6,6 +6,14 @@ A small, local monitor for categorical predictions and supplied outcome labels. 
 
 **Usage:** private local noncommercial use is permitted under the [license](LICENSE.md). Business evaluation for a commercial application requires separate written permission; see [usage guidance](docs/PROJECT_STATUS.md).
 
+## Browser interface preview
+
+A [static interface mock-up](docs/interface/README.md) illustrates inputs, settings
+and report review for `resqmonitor`. It is not connected to the Python tool and does
+not run its calculations. Start it locally with the preview guide; use the Python
+quick start below for actual results. The site also contains the other two
+independent interface previews.
+
 ## Try it in one command
 
 Requires Python **3.11 or newer**. Verified on Linux; the installation commands below use POSIX paths. Windows behavior has not been verified. From this repository directory:

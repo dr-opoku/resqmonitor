@@ -21,3 +21,14 @@ Report reproducible defects or documentation problems through the repository's I
 Discuss a proposed code contribution with the owner before publishing a modified fork or a patch containing repository code. Private local changes for qualifying noncommercial purposes are permitted; publication of modifications is not generally permitted. The license reserves applicable GitHub platform rights. Obtain written permission covering the proposed contribution workflow and the owner's intended use of the contribution before submitting code. A bug report or a description of a suggested change does not require publishing a modified copy. Do not assume submission transfers copyright or grants commercial relicensing rights.
 
 For a suspected security issue use GitHub private vulnerability reporting if available, otherwise an existing private owner channel. Do not publish secrets or exploit details in a public issue. No private reporting address or response guarantee is implied.
+
+## Static interface preview
+
+The owner-supplied HTML v2 package is included as a compiled, locally served
+[interface mock-up](interface/README.md). It has no Python backend connection
+and performs no tool calculations. Overview values are illustrative. The Python
+quick start and report contracts remain authoritative; file handoff is manual.
+Editable frontend source and a lockfile were not supplied, and browser runtime
+verification is not claimed. This addition does not establish frontend production
+readiness, a public deployment or new usage rights. Hosting-specific legal copy
+and complete dependency provenance require review before public deployment.
