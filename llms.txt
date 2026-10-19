@@ -29,6 +29,8 @@ Local exact-match classification result monitoring. Python >=3.11. No core runti
 
 ## Navigation
 
+- [Disclosure review scope, cleanup and limits](docs/DISCLOSURE_REVIEW.md)
+
 - [Start and commands](README.md)
 - [Case study](docs/CASE_STUDY.md)
 - [Evidence limits](docs/EVIDENCE_POLICY.md)

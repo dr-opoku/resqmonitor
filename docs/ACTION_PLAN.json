@@ -236,5 +236,21 @@
     ],
     "verification": "VERIFICATION.json",
     "repository_visibility": "unchanged"
+  },
+  "disclosure_preparation_2026_10_19": {
+    "reviewed_baseline": "c94e96b55be9abf3613bcb11cd794dd64a2f87ea",
+    "status": "completed_at_stated_baseline_visibility_unchanged",
+    "record": "DISCLOSURE_REVIEW.md",
+    "history_rewritten": false,
+    "merged_branches_removed": [
+      "feat/standalone-showcase",
+      "fix/publication-status-20261019"
+    ],
+    "existing_actions_runs_preserved": 18,
+    "actions_artifacts_present": 0,
+    "private_evidence_backup": "retained_outside_repository",
+    "publication_visibility": "private",
+    "frontend_public_deployment": "not_established",
+    "license": "unchanged_Noncommercial_Local_Use_1.1.0"
   }
 }

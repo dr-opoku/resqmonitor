@@ -2,6 +2,14 @@
 
 This is a small reference implementation. Maintenance is best effort; there is no service-level agreement, production certification or guaranteed response time. Checked behavior and remaining limits are recorded in [the review](REVIEW.md).
 
+## Disclosure preparation
+
+The [19 October disclosure review](DISCLOSURE_REVIEW.md) records the inspected
+Git history, Actions logs, GitHub discussion surfaces and cleanup. Merged branch
+tips and earlier verification records remain traceable; private audit backups
+are kept outside the repository. Visibility remains an owner decision. Public
+source publication and deployment of the compiled interface have separate limits.
+
 ## Current license
 
 The owner-selected [Noncommercial Local Use License 1.1.0](../LICENSE.md) applies. This is a custom source-available license, not an open-source license. It permits private local use and modification for qualifying noncommercial purposes. Software redistribution, publication of modified copies and services for other users require separate written permission, subject to the hosting-platform and statutory rights reserved in the license. Commercial use requires a separate written license.

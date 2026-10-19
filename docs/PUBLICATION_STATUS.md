@@ -1,5 +1,12 @@
 # Publication follow-up — 19 October 2026
 
+## Latest disclosure preparation
+
+The subsequent [disclosure review](DISCLOSURE_REVIEW.md) covers Git history,
+Actions logs, GitHub text surfaces and completed branch cleanup. It preserves
+the evidence chain and records the remaining publication/deployment boundaries.
+The dated findings below retain their original implementation-review scope.
+
 ## Scope and current status
 
 This follow-up records corrections to resqmonitor's overall-status explanation, optional MCP dependency declaration, terminal display handling and current license status. It follows a read-only publication audit and an independent Claude Code review requested with `claude-fable-5-1`. The actual review completed without a fallback selector and included its ending. This records the adapter's selector, not independent attestation of the model provider or backend. The external reviewer assessed supplied material; implementing-agent checks are recorded separately. No model was called by regression tests.
