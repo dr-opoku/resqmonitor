@@ -32,11 +32,15 @@ For a suspected security issue use GitHub private vulnerability reporting if ava
 
 ## Static interface preview
 
-The owner-supplied HTML v2 package is included as a compiled, locally served
-[interface mock-up](interface/README.md). It has no Python backend connection
-and performs no tool calculations. Overview values are illustrative. The Python
-quick start and report contracts remain authoritative; file handoff is manual.
-Editable frontend source and a lockfile were not supplied, and browser runtime
-verification is not claimed. This addition does not establish frontend production
-readiness, a public deployment or new usage rights. Hosting-specific legal copy
-and complete dependency provenance require review before public deployment.
+The [compiled interface snapshot](interface/README.md) mirrors the owner's
+[published overview](https://monitorsample.opoku.de), captured on 20 October 2026.
+It has no Python backend connection and performs no tool calculations. Overview
+values are synthetic illustrations. The Python quick start and report contracts
+remain authoritative; file handoff is manual.
+
+The [integration review](interface/REVIEW.md) records the source, the unavailable
+Lovable editor, browser checks and corrected mobile overflow. Earlier v2 archive
+provenance is retained. Editable frontend source and a lockfile remain unavailable.
+These limited interface checks do not establish production readiness, complete
+dependency provenance or verified hosting-specific legal statements. Usage rights
+remain as specified in the existing license.

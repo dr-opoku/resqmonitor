@@ -10,7 +10,7 @@ TanStack Store, Lucide, Tailwind CSS, clsx, tailwind-merge and alien-signals.
 
 React identifies itself as 19.2.8 in the JavaScript bundle; the CSS header
 identifies Tailwind CSS 4.3.3. Other dependency versions are not established.
-The attachment did not include editable application source, a package manifest,
+The original attachment and current compiled capture did not include editable application source, a package manifest,
 a lockfile, a complete dependency inventory, source maps or build instructions.
 These notices record identifiable components and do not certify a complete
 license or dependency audit. Obtain the original source project and its pinned

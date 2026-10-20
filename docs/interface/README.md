@@ -68,20 +68,27 @@ model requests only when explicitly executed in Python.
 
 ## Source, maintenance and hosting limits
 
-The starting artifact is the owner-supplied `dr-opoku-monitors-html_v2.zip`.
-[Package provenance](site/PACKAGE_PROVENANCE.json) records its SHA-256, the
-original file hashes and the integration patches. The visual design and shared
-routes are retained; installation captions, external font links and cache
-headers were adjusted; literal NULs in router script strings are encoded as
-JavaScript Unicode escapes. The original archive is not copied into the repository.
+This snapshot mirrors the owner's [published website](https://monitorsample.opoku.de),
+captured on 20 October 2026. The requested Lovable editor returned HTTP 403;
+equality with unpublished editor changes has not been established.
+[Current provenance](site/PACKAGE_PROVENANCE.json) records source response hashes,
+integrated file hashes and patches. [Earlier provenance](site/PACKAGE_PROVENANCE_V2.json)
+preserves the owner-supplied HTML v2 archive evidence.
+
+The design, text, routes and file helpers are retained. External font links are
+removed from HTML and the hydrated head, literal NULs in router strings are
+encoded as Unicode escapes, and narrow-screen command/report overflow is corrected.
+Local HTTP compatibility helpers provide client-side SHA-256 and command-copy
+fallbacks when secure-context browser APIs are unavailable.
+The existing favicon is retained because its current public endpoint was unavailable.
 
 This is a compiled snapshot, not a reproducible frontend source project.
 Editable components, dependency lockfile and a build pipeline were not supplied.
 See [third-party notices](site/THIRD_PARTY_NOTICES.md) and their inventory limits.
-Future design changes should be made in the original source project and exported
-as a replacement package, then reconciled across all three repositories.
-No browser interaction or end-to-end runtime verification is claimed by this
-integration; existing Python verification records concern the Python tool.
+Make future text/design changes in the original source project and reconcile
+exports across the three repositories. The [integration review](REVIEW.md)
+documents browser navigation, configuration export, synthetic report import/export
+and mobile checks. These checks concern the interface, not Python execution.
 
 All route and asset URLs assume a site served at the origin root. Publishing at
 `https://OWNER.github.io/REPOSITORY/` needs a source rebuild with that base path

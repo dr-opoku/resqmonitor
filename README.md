@@ -2,17 +2,26 @@
 
 **Are the results still good enough—and what does a correct result cost?**
 
-A small, local monitor for categorical predictions and supplied outcome labels. It reports accuracy, outcome coverage, confidence alignment, cost per correct result, latency, and changes from a baseline. The core uses no AI model, account, database, or network connection.
+Review predictions against actual outcomes: accuracy, outcome coverage, confidence, cost per correct result, latency and changes from a baseline. The tool evaluates categorical predictions against supplied reference labels; it does not assess general text quality. The core needs no AI model, account, database or network connection.
 
 **Usage:** private local noncommercial use is permitted under the [license](LICENSE.md). Business evaluation for a commercial application requires separate written permission; see [usage guidance](docs/PROJECT_STATUS.md).
 
 ## Browser interface preview
 
-A [static interface mock-up](docs/interface/README.md) illustrates inputs, settings
-and report review for `resqmonitor`. It is not connected to the Python tool and does
-not run its calculations. Start it locally with the preview guide; use the Python
-quick start below for actual results. The site also contains the other two
-independent interface previews.
+The [online overview](https://monitorsample.opoku.de) explains the three independent
+examples: **Is the input usable? Are the results good enough? Which LLM
+configuration meets the task's requirements?**
+
+The [browser mock-up for resqmonitor](https://monitorsample.opoku.de/resqmonitor)
+illustrates inputs, settings and reports. It is not connected to the Python
+program and runs none of its calculations. Run this repository's code locally
+to generate results; use the [local preview guide](docs/interface/README.md) to
+serve the included site snapshot yourself.
+
+**Preview values are synthetic illustrations.** Actual reports must be generated
+in Python. An observed success rate of 100% can still yield an `unknown` verdict
+when the declared evidence requirements are not met. See the
+[interface integration review](docs/interface/REVIEW.md) for the source and checks.
 
 ## Try it in one command
 
